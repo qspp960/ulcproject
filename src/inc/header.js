@@ -2,15 +2,31 @@ import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import '../App.css';
 import Modal from 'react-awesome-modal';
+import axios from 'axios';
+
 class header extends Component {
   constructor(props){
-      super(props);
+      super(props)
       this.state = {
-          visible : false,
+          visible : true,
           id : "",
           password : ""
       }
-  }  
+  }
+  _selectUserData = async (e) => {
+    const res = await axios('/send/pw', {
+      method : 'POST',
+      data : this.state,
+      headers: new Headers()
+      })
+
+      if(res.data) {
+        console.log(this.state)
+      }else{
+        console.log(`err!!!!!!!!!!!`)
+      }
+   }
+
   _openModal = function() {
     this.setState({
         visible : true
@@ -70,7 +86,7 @@ class header extends Component {
                       </div>
 
                       <div className='submit_div'>
-                        <div> <input type='button' value='로그인'/> </div>
+                        <div> <input type='button' value='로그인' onClick={() => this._selectUserData()}/> </div>
                         <div> <input type='button' value='취소' onClick={() => this._closeModal()}/> </div>
                       </div>
                     </div>
