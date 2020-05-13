@@ -21,7 +21,7 @@ class header extends Component {
       })
 
       if(res.data) {
-        console.log(this.state)
+        console.log(res.data)
       }else{
         console.log(`err!!!!!!!!!!!`)
       }

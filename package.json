@@ -149,8 +149,9 @@
       "react-app"
     ]
   },
-  "proxy": "https://localhost:4000",
+  "proxy": "http://localhost:4000",
   "secure": false,
+
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.3"
