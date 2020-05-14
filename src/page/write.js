@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './main.css';
 class write extends Component {
   constructor(props) {
     super(props)
@@ -8,10 +8,28 @@ class write extends Component {
   render() {
 
     return (
-        <div>
+        <div className="Write">
+            
           <div>
-            <h2> This is Write Page </h2>
+            환자 번호
+            <input type='text' id='patient_num'/>
           </div>
+
+          <div>
+              환자 이름
+              <input type='text' id='patient_name'/>
+          </div>
+
+          <div>
+              복용 약 이름
+              <input type='text' id='med_name'/>
+          </div>
+
+          <div>
+              복용 약 주기
+              <input type='text' id='med_time'/>
+          </div>
+
         </div>
     );
   }
