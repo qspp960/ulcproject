@@ -20,6 +20,7 @@
     "body-parser": "^1.19.0",
     "camelcase": "^5.3.1",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "core-util-is": "^1.0.2",
     "css-loader": "3.4.2",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -63,6 +64,7 @@
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "sequelize": "^5.21.8",
+    "sha256": "^0.2.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
@@ -151,7 +153,6 @@
   },
   "proxy": "http://localhost:4000",
   "secure": false,
-
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.3"
