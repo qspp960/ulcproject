@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { Main } from './page/index.js';
 import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
 
@@ -15,7 +16,12 @@ class App extends Component {
   render() {
     return(
     <div>
+      <div>
         <Head />
+      </div>
+      <div>
+        <Main />
+      </div>
     </div>
     )
   }

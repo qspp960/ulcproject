@@ -8,7 +8,7 @@ class header extends Component {
   constructor(props){
       super(props)
       this.state = {
-          visible : true,
+          visible : false,
           id : "",
           password : "",
           login : false,
@@ -86,7 +86,11 @@ class header extends Component {
     console.log('아이디: ' + this.state.id + ' 비밀번호: '+this.state.password);
     return (
         <div class='header_grid'>
-            <div> </div>
+            <div className = 'acenter'>
+              {this.state.login
+              ? <h5> <Link to='/write'>포스트 작성</Link></h5> 
+              : null }
+            </div>
             <div className='acenter'>
                 <Route path='/'/>
                 <Link className='link_tit' to='/'> <h3> ID's 구급상자 로봇 </h3> </Link>
