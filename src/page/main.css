@@ -8,6 +8,7 @@
 .Write {
     padding: 20px;
     padding-left: 30px;
+
 }
 
 .Write div {
@@ -59,3 +60,17 @@
 
 #med_time:focus { outline : none; }
 
+#post_submit {
+    text-align: right;
+    margin-top: 30px;
+    padding-right: 60px;
+}
+
+#post_submit button {
+    width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #ababab;
+    cursor: pointer;
+    background-color: white;
+}

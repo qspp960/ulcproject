@@ -29,6 +29,11 @@ class write extends Component {
               복용 약 주기
               <input type='text' id='med_time'/>
           </div>
+          <div>
+              <div id = 'post_submit'>
+                  <button>등록</button>
+              </div>
+          </div>
 
         </div>
     );

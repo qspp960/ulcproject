@@ -8,7 +8,7 @@ class header extends Component {
   constructor(props){
       super(props)
       this.state = {
-          visible : false,
+          visible : true,
           id : "",
           password : "",
           login : false,
@@ -56,9 +56,9 @@ class header extends Component {
   }
 
   _closeModal = function() {
-    this.setState({
-        visible : false
-    });
+    if(this.state.login === true){
+      this.setState({visible : false});
+    }
   }
   _changeID = function() {
     const id_v = document.getElementsByName('id')[0].value;
@@ -78,6 +78,7 @@ class header extends Component {
     if(window.confirm('로그아웃 하시겠습니까?')) {
       sessionStorage.removeItem('login')
       this.setState({ login : false })
+
     }
   }
 
@@ -86,18 +87,13 @@ class header extends Component {
     console.log('아이디: ' + this.state.id + ' 비밀번호: '+this.state.password);
     return (
         <div class='header_grid'>
-            <div className = 'acenter'>
-              {this.state.login
-              ? <h5> <Link to='/write'>포스트 작성</Link></h5> 
-              : null }
-            </div>
             <div className='acenter'>
                 <Route path='/'/>
                 <Link className='link_tit' to='/'> <h3> ID's 구급상자 로봇 </h3> </Link>
             </div>
 
             <div className='acenter'> 
-            {this.state.login ? <h5 className='btn_cursor' onClick={() => this._logout()}> LOGOUT </h5>
+            {this.state.login ? <h5 className='btn_cursor' onClick={() => this._logout()} > LOGOUT</h5>
                   : <h5 className='btn_cursor' onClick={() => this._openModal()}> LOGIN </h5>
             }
             <Modal visible={this.state.visible} 

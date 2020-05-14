@@ -10,7 +10,7 @@ class home extends Component {
     return (
         <div>
           <div>
-            <h2> This is Home </h2>
+            <h2> 메인페이지 </h2>
           </div>
         </div>
     );
