@@ -32,7 +32,6 @@ let sequelize = new Sequelize(
     .catch(err => {
         console.log('UNABLE TO CONNECT DB!! -> ', err);
     });
-    db.Teacher = require('./teacher')(sequelize,Sequelize);
-    db.Class = require('./class')(sequelize,Sequelize);
+    db.Admin = require('./admin')(sequelize,Sequelize);
 db.secret = '(9*)5$&dfds!3%^0%^@@2$1!#5@2sdf!4';
 module.exports = db;

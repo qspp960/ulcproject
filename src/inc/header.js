@@ -10,20 +10,42 @@ class header extends Component {
       this.state = {
           visible : true,
           id : "",
-          password : ""
+          password : "",
+          login : false,
       }
   }
-  _selectUserData = async (e) => {
+  componentDidMount() {
+    if(sessionStorage.login) {
+      this.setState({ login : true })
+    }
+  }
+  _selectUserData = async (e) => { const id = this.state.id.trim();
+    const password = this.state.password.trim();
+
+    if(id === "") {
+      return alert('아이디를 입력해주세요.');
+
+    } else if(password === "") {
+      return alert('비밀번호를 입력해주세요.');
+    }
+
+    const obj = { id : id, password : password }
     const res = await axios('/send/pw', {
       method : 'POST',
-      data : this.state,
+      data : obj,
       headers: new Headers()
       })
 
       if(res.data) {
-        console.log(res.data)
+        console.log(res.data.msg);
+      }
+      if(res.data.suc){
+        sessionStorage.setItem('login',true);
+        this.setState({login:true});
+        this._closeModal();
+        return alert('로그인 완료');
       }else{
-        console.log(`err!!!!!!!!!!!`)
+        return alert('아이디 및 비밀번호가 일치하지 않습니다');
       }
    }
 
@@ -52,6 +74,12 @@ class header extends Component {
         password : pw_v
     });
   }
+  _logout = function() {
+    if(window.confirm('로그아웃 하시겠습니까?')) {
+      sessionStorage.removeItem('login')
+      this.setState({ login : false })
+    }
+  }
 
 
   render() {
@@ -65,7 +93,9 @@ class header extends Component {
             </div>
 
             <div className='acenter'> 
-            <h5 onClick={() => this._openModal()}> LOGIN </h5>
+            {this.state.login ? <h5 className='btn_cursor' onClick={() => this._logout()}> LOGOUT </h5>
+                  : <h5 className='btn_cursor' onClick={() => this._openModal()}> LOGIN </h5>
+            }
             <Modal visible={this.state.visible} 
                        width="400" height="360"
                        effect="fadeInDown" 
@@ -82,7 +112,7 @@ class header extends Component {
 
                       <div className='login_input_div' style={{ 'marginTop' : '40px'}}>
                         <p> Password </p>
-                        <input type='text' name='password' onChange={()=>this._changePW()}/>
+                        <input type='password' name='password' onChange={()=>this._changePW()}/>
                       </div>
 
                       <div className='submit_div'>
