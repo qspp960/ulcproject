@@ -3,12 +3,21 @@ import { Route, Link, Switch } from 'react-router-dom';
 import '../App.css';
 import Modal from 'react-awesome-modal';
 import axios from 'axios';
+import imgtitle from '../image/title.PNG';
+import signin from '../image/signin.PNG';
+import login from '../image/login.PNG';
+import logout from '../image/logout.PNG';
+import '../page/main.css';
+import patientinfo from '../image/infomenu.PNG';
+import datainsert from '../image/datainsertmenu.PNG';
+import patientstatemenu from '../image/patientstatemenu.PNG';
+import datamenu from '../image/datamenu.PNG';
 
 class header extends Component {
   constructor(props){
       super(props)
       this.state = {
-          visible : true,
+          visible : false,
           id : "",
           password : "",
           login : false,
@@ -21,21 +30,18 @@ class header extends Component {
   }
   _selectUserData = async (e) => { const id = this.state.id.trim();
     const password = this.state.password.trim();
-
     if(id === "") {
       return alert('아이디를 입력해주세요.');
 
     } else if(password === "") {
       return alert('비밀번호를 입력해주세요.');
     }
-
     const obj = { id : id, password : password }
     const res = await axios('/send/pw', {
       method : 'POST',
       data : obj,
       headers: new Headers()
       })
-
       if(res.data) {
         console.log(res.data.msg);
       }
@@ -56,9 +62,7 @@ class header extends Component {
   }
 
   _closeModal = function() {
-    if(this.state.login === true){
       this.setState({visible : false});
-    }
   }
   _changeID = function() {
     const id_v = document.getElementsByName('id')[0].value;
@@ -78,7 +82,6 @@ class header extends Component {
     if(window.confirm('로그아웃 하시겠습니까?')) {
       sessionStorage.removeItem('login')
       this.setState({ login : false })
-
     }
   }
 
@@ -86,15 +89,20 @@ class header extends Component {
   render() {
     console.log('아이디: ' + this.state.id + ' 비밀번호: '+this.state.password);
     return (
+      <div>
         <div class='header_grid'>
-            <div className='acenter'>
-                <Route path='/'/>
-                <Link className='link_tit' to='/'> <h3> ID's 구급상자 로봇 </h3> </Link>
-            </div>
-
-            <div className='acenter'> 
-            {this.state.login ? <h5 className='btn_cursor' onClick={() => this._logout()} > LOGOUT</h5>
-                  : <h5 className='btn_cursor' onClick={() => this._openModal()}> LOGIN </h5>
+          <div className='acentertitle'>
+            <Route path='/'/> 
+            <Link className='link_tit' to='/'><img src={imgtitle} /></Link>
+          </div>
+          <div>
+          </div>
+            <div className='acenter_login'> 
+            {this.state.login ? <Link className='link_tit' to='/'><h3 className='btn_cursor' onClick={() => this._logout()}> 로그아웃 </h3></Link>
+                  : <div className='menu'>
+                      <li><h3 className='btn_cursor' onClick={() => this._openModal()}>로그인</h3></li>
+                      <li><h3> <Link className='link_tit' to='./signup'> 회원가입</Link></h3></li>
+                    </div>
             }
             <Modal visible={this.state.visible} 
                        width="400" height="360"
@@ -123,6 +131,23 @@ class header extends Component {
                     </form>
                   </div>
                 </Modal>
+            </div>
+        </div>
+            <div className='Mainmenubar'>
+                <div id='Mainmenubar-first'>
+                    <h2>환자 정보 확인</h2>
+                </div>
+                <div id='Mainmenubar-second'>
+                {this.state.login ?
+                  <Link className='link_tit' to='/write'><h2>데이터 입력</h2></Link>
+                : <h2>데이터 입력</h2>}
+                </div>
+                <div id='Mainmenubar-third'>
+                      <h2>환자 상태 확인</h2>
+                </div>
+                <div id='Mainmenubar-fourth'>
+                      <h2>이전 데이터 확인</h2>
+                </div>
             </div>
         </div>
     );

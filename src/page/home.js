@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import imgscreen from './mainscreen.PNG';
+import './main.css';
 class home extends Component {
   constructor(props) {
     super(props)
@@ -9,8 +10,8 @@ class home extends Component {
 
     return (
         <div>
-          <div>
-            <h2> 메인페이지 </h2>
+          <div className="acenter">
+            <img src = {imgscreen}></img>
           </div>
         </div>
     );

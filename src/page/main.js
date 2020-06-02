@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import { Home, Write } from './index.js';
+import { Home, Write, Signup } from './index.js';
+import { Right_Write } from './right/index.js';
 import './main.css';
+import patientinfo from '../image/infomenu.PNG';
+import datainsert from '../image/datainsertmenu.PNG';
+import patientstatemenu from '../image/patientstatemenu.PNG';
+import datamenu from '../image/datamenu.PNG';
 class main extends Component {
   constructor(props) {
     super(props)
@@ -10,18 +15,22 @@ class main extends Component {
   render() {
 
     return (
+      <div>
+        
+
         <div className='Mains'>
             <div id='Mains-left'>
-              <h5 align="center"> <Link to='/write'>환자 데이터 입력</Link></h5> 
             </div>
             <div>
                 <Route path='/' component={Home} exact />
                 <Route path='/write' component={Write} />
             </div>
             <div id='Mains-right'>
-                <h3> 오른쪽.. 해당 사용자 정보 출력할 생각 </h3>
+                <Route path='/write' component={Right_Write} />
             </div>
         </div>
+      </div>
+        
     );
   }
 }

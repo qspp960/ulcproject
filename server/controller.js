@@ -26,5 +26,17 @@ module.exports = {
             console.log('1. salt 값 : ' , salt);
             console.log('2. hash 결과 : ', hash);
           },
-    }
+    },
+    add : {
+      board : (req, res) => {
+        const body = req.body;
+
+        model.add.board(body, result => {
+          if(result){
+            res.send(true);
+          }
+        })
+      }
+    },
 }
+
