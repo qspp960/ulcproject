@@ -24,6 +24,31 @@ module.exports = {
             .catch(err =>{
                 throw err;
             })
+        },
+        searchOverlap : (body, callback) =>{
+            Timesetting.findAll({
+                where : { [Op.and]: [{patient_id: body.patient_id, patientname: body.patientname, medName: body.medName }]}
+            })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        }
+
+    },
+    delete : {
+        delOverlap : (body, callback) =>{
+            Timesetting.destroy({
+                where :{ [Op.and]: [{patient_id: body.patient_id, patientname: body.patientname, medName: body.medName }]}
+            })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
         }
     },
     add : {

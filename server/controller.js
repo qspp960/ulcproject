@@ -42,12 +42,28 @@ module.exports = {
       },
       timesetting : (req, res) => {
         const body = req.body;
-
-        model.add.timesetting(body, result => {
-          if(result) {
-            res.send(true);
+        model.api.searchOverlap(body, result =>{
+          if(result[0]){
+            model.delete.delOverlap(body, result=>{
+              model.add.timesetting(body, result => {
+                if(result) {
+                  res.send(true);
+                }
+            })
+            })
           }
+          else{
+          model.add.timesetting(body, result => {
+              if(result) {
+                res.send(true);
+              }
+          })
+
+        }
+
         })
+
+        
       },
     },
 
