@@ -33,7 +33,7 @@
     margin-left: 50px;
 }
 
-#patient_num {
+#patient_id {
     width: 91%;
     padding-bottom: 30px;
     border: none;
@@ -42,9 +42,9 @@
     font-weight: bold;
 }
 
-#patient_num:focus { outline : none; }
+#patient_id:focus { outline : none; }
 
-#patient_name {
+#patientname {
     width: 91%;
     padding-bottom: 30px;
     border: none;
@@ -53,9 +53,9 @@
     font-weight: bold;
 }
 
-#patient_name:focus { outline : none; }
+#patientname:focus { outline : none; }
 
-#med_name {
+#medName {
     width: 91%;
     padding-bottom: 30px;
     border: none;
@@ -64,9 +64,9 @@
     font-weight: bold;
 }
 
-#med_name:focus { outline : none; }
+#medName:focus { outline : none; }
 
-#med_time {
+#medTime {
     width: 91%;
     padding-bottom: 30px;
     border: none;
@@ -75,7 +75,7 @@
     font-weight: bold;
 }
 
-#med_time:focus { outline : none; }
+#medTime:focus { outline : none; }
 
 #post_submit {
     text-align: right;

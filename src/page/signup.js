@@ -73,7 +73,7 @@ class Signup extends Component {
         sex : sex, 
         email : email };
 
-      const add_user = await axios('/add/user', {
+      const add_user = await axios('/add/homepageusers', {
         method : 'POST',
         headers: new Headers(),
         data : data

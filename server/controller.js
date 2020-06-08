@@ -33,17 +33,17 @@ module.exports = {
           },
     },
     add : {
-      user : (req, res) => {
+      homepageusers : (req, res) => {
         const body = req.body;
         const hash_pw = hashing.enc(body.id, body.password, salt);
-        model.add.user(body, hash_pw, now_date, result =>{
+        model.add.homepageusers(body, hash_pw, now_date, result =>{
           res.send(result);
         })
       },
-      board : (req, res) => {
+      timesetting : (req, res) => {
         const body = req.body;
 
-        model.add.board(body, result => {
+        model.add.timesetting(body, result => {
           if(result) {
             res.send(true);
           }

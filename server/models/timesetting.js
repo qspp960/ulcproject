@@ -1,30 +1,31 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define(
-      'board',
+      'timesetting',
       {
-        board_id: {
+        id: {
          type: DataTypes.INTEGER,
          primaryKey: true,
          autoIncrement: true,
          allowNull : false,
        },
 
-       patient_num : {
-        type: DataTypes.STRING(50),
+    
+       patientname : {
+        type: DataTypes.STRING(20),
         allowNull : false
        },
 
-       patient_name : {
-        type: DataTypes.STRING(50),
+       patient_id : {
+        type: DataTypes.INTEGER,
         allowNull : false
        },
 
-       med_name : {
-        type: DataTypes.STRING(50),
+       medName : {
+        type: DataTypes.STRING(20),
         allowNull : false
        }, 
 
-       med_time : {
+       medTime : {
         type: DataTypes.INTEGER,
         allowNull : false
        },

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require ('./controller');
 
-router.post('/add/board',controller.add.board);
+router.post('/add/timesetting',controller.add.timesetting);
 router.post('/send/pw',controller.api.sendPw);
-router.post('/add/user',controller.add.user);
+router.post('/add/homepageusers',controller.add.homepageusers);
 
 module.exports = router;

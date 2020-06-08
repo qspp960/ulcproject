@@ -5,9 +5,9 @@ moment.tz.setDefault("Asia/Seoul");
 
 const now_date = moment().format('YYYY-MM-DD HH:mm:ss');
 const {
-    Admin,
-    Board,
-    User,
+    Alltimelist,
+    Timesetting,
+    Homepageusers,
     Sequelize: { Op }
 } = require('./models');
 sequelize.query('SET NAMES utf8');
@@ -15,7 +15,7 @@ sequelize.query('SET NAMES utf8');
 module.exports = {
     api : {
         searchInfo : (body, hash, callback) => {
-            User.findAll({
+            Homepageusers.findAll({
                 where : { [Op.and]: [{ id : body.id, password : hash }] }
             })
             .then(data => {
@@ -27,15 +27,15 @@ module.exports = {
         }
     },
     add : {
-        user : (body, hash_pw, now, callback) => {
-            User.count({
+        homepageusers : (body, hash_pw, now, callback) => {
+            Homepageusers.count({
                 where : { id : body.id }
             })
             .then(cnt => {
                 if(cnt > 0) {
                     callback(false);
                 }else {
-                    User.create({
+                    Homepageusers.create({
                              admin : 'N',
                              id : body.id,
                              password : hash_pw,
@@ -49,13 +49,27 @@ module.exports = {
                 }
             })
         },
-        board : (body, callback) => {
+        timesetting : (body, callback) => {
 
-            Board.create({
-                patient_num : body.patient_num,
-                patient_name : body.patient_name,
-                med_name : body.med_name,
-                med_time : body.med_time,
+            Timesetting.create({
+                patient_id : body.patient_id,
+                patientname : body.patientname,
+                medName: body.medName,
+                medTime : body.medTime,
+                date : now_date
+            })
+            .then(data => {
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+
+            Alltimelist.create({
+                patient_id : body.patient_id,
+                patientname : body.patientname,
+                medName: body.medName,
+                medTime : body.medTime,
                 date : now_date
             })
             .then(data => {
