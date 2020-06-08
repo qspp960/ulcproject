@@ -110,3 +110,44 @@
     cursor: pointer;
     background-color: white;
 }
+
+#signup_title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.Signup {
+    padding: 70px 0px 0px 0%;
+    display: grid;
+    grid-template-columns: 50% auto;
+}
+
+.Signup div {
+    text-align: center;
+}
+
+.Signup div input { padding: 3px; }
+
+input[name=signup_birthday] { width: 80px; }
+input[name=signup_sex] { width: 10px; margin-left: 5px;}
+input[name=signup_email] { width : 120px }
+select[name=signup_email_select] { padding: 3px; margin-left: 5px; }
+
+input[name=sigunup_submit] { 
+    margin : 13% 54% 0% 46%; 
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    border: solid 1px #ababab;
+    background-color: white; 
+    cursor: pointer;
+    font-size: 20px;
+}
+input[name=signup_email_write] {
+    padding: 3px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 10%;
+}
+
+#signup_section { border-left: solid 1px #ababab; }

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
-import submit from '../image/submit.PNG';
-import patientnum from '../image/patientnum.PNG';
-import patientname from '../image/patientname.PNG';
-import medname from '../image/medname.PNG';
-import medtime from '../image/medtime.PNG';
+
 class write extends Component {
   constructor(props) {
     super(props)

@@ -4,14 +4,7 @@ import '../App.css';
 import Modal from 'react-awesome-modal';
 import axios from 'axios';
 import imgtitle from '../image/title.PNG';
-import signin from '../image/signin.PNG';
-import login from '../image/login.PNG';
-import logout from '../image/logout.PNG';
 import '../page/main.css';
-import patientinfo from '../image/infomenu.PNG';
-import datainsert from '../image/datainsertmenu.PNG';
-import patientstatemenu from '../image/patientstatemenu.PNG';
-import datamenu from '../image/datamenu.PNG';
 
 class header extends Component {
   constructor(props){
@@ -91,17 +84,17 @@ class header extends Component {
     return (
       <div>
         <div class='header_grid'>
+        <div>
+          </div>
           <div className='acentertitle'>
             <Route path='/'/> 
             <Link className='link_tit' to='/'><img src={imgtitle} /></Link>
-          </div>
-          <div>
           </div>
             <div className='acenter_login'> 
             {this.state.login ? <Link className='link_tit' to='/'><h3 className='btn_cursor' onClick={() => this._logout()}> 로그아웃 </h3></Link>
                   : <div className='menu'>
                       <li><h3 className='btn_cursor' onClick={() => this._openModal()}>로그인</h3></li>
-                      <li><h3> <Link className='link_tit' to='./signup'> 회원가입</Link></h3></li>
+                      <li><h3> <Link className='link_tit' to='/signup'> 회원가입</Link></h3></li>
                     </div>
             }
             <Modal visible={this.state.visible} 
