@@ -8,6 +8,7 @@ const {
     Alltimelist,
     Timesetting,
     Homepageusers,
+    Board,
     Sequelize: { Op }
 } = require('./models');
 sequelize.query('SET NAMES utf8');
@@ -52,6 +53,20 @@ module.exports = {
         }
     },
     add : {
+        board : (body, callback) =>{
+            Board.create({
+                patient_id: body.patient_id,
+                patientname : body.patientname,
+                contents : body.contents,
+                date : now_date
+            })
+            .then(data =>{
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
         homepageusers : (body, hash_pw, now, callback) => {
             Homepageusers.count({
                 where : { id : body.id }

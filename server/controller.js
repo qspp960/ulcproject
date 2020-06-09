@@ -33,6 +33,14 @@ module.exports = {
           },
     },
     add : {
+      board : (req, res) =>{
+        const body = req.body;
+        model.add.board(body, result =>{
+          if(result){
+            res.send(true);
+          }
+        })
+      },
       homepageusers : (req, res) => {
         const body = req.body;
         const hash_pw = hashing.enc(body.id, body.password, salt);

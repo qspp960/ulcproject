@@ -135,8 +135,10 @@ class header extends Component {
                   <Link className='link_tit' to='/write'><h2>데이터 입력</h2></Link>
                 : <h2>데이터 입력</h2>}
                 </div>
-                <div id='Mainmenubar-third'>
-                      <h2>환자 상태 확인</h2>
+                <div id='Mainmenubar-third'> 
+                {this.state.login ?
+                  <Link className='link_tit' to='/board'><h2>게시판</h2></Link>
+                : <h2>게시판</h2>}
                 </div>
                 <div id='Mainmenubar-fourth'>
                       <h2>이전 데이터 확인</h2>

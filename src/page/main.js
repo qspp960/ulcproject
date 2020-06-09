@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import { Home, Write, Signup } from './index.js';
+import { Home, Write, Signup, Board } from './index.js';
 import './main.css';
 
 class main extends Component {
@@ -21,6 +21,7 @@ class main extends Component {
                 <Route path='/' component={Home} exact />
                 <Route path='/write' component={Write} />
                 <Route path='/signup' component={Signup} />
+                <Route path='/board' component={Board} />
             </div>
             <div id='Mains-right'>
                 

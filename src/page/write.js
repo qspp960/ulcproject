@@ -13,7 +13,7 @@ class write extends Component {
     }
   }
 
-  _submitBoard = async function() {
+  _submitwrite = async function() {
     const patient_id = document.getElementsByName('patient_id')[0].value.trim();
     const patientname = document.getElementsByName('patientname')[0].value.trim();
     const medName = document.getElementsByName('medName')[0].value.trim();
@@ -66,7 +66,7 @@ class write extends Component {
           </div>
 
           <div id='post_submit'>
-            <button onClick={() => this._submitBoard()}><h2>등록</h2></button>
+            <button onClick={() => this._submitwrite()}><h2>등록</h2></button>
           </div>
 
         </div>
