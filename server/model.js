@@ -9,6 +9,7 @@ const {
     Timesetting,
     Homepageusers,
     Boards,
+    Users,
     Sequelize: { Op }
 } = require('./models');
 sequelize.query('SET NAMES utf8');
@@ -40,18 +41,85 @@ module.exports = {
 
     },
     get : {
-        board_cnt : (callback) => {
-            Boards.count()
+        users_cnt : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+    
+            Users.count({
+                where : { 
+                    UserName : {
+                        [Op.like] : search
+                    },    
+                    
+                }
+            })
+            .then(result => {
+              callback(result);
+              console.log("users 카운트"+ result);
+            })
+          },
+          users : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+            
+            Users.findAll({
+                where : {
+                    UserName : {
+                        [Op.like] : search
+                    },
+                },
+                    limit : (body.page * body.limit),
+                    offset : (body.page - 1) * body.limit,
+                    order: sequelize.literal('patient_id ASC')
+                })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
+        board_cnt : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+    
+            Boards.count({
+                where : {
+                    patientname : {
+                        [Op.like] : search
+                    }
+                }
+            })
             .then(result => {
               callback(result);
             })
           },
         board : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+            
             Boards.findAll({
-                limit : (body.page * body.limit),
-                offset : (body.page - 1) * body.limit,
-                order: sequelize.literal('board_id DESC')
-              })
+                where : {
+                    patientname : {
+                        [Op.like] : search
+                    }
+                },
+                    limit : (body.page * body.limit),
+                    offset : (body.page - 1) * body.limit,
+                    order: sequelize.literal('board_id DESC')
+                })
             .then(data => {
                 callback(data)
             })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import { Home, Write, Signup, Board, List } from './index.js';
+import { Home, Write, Signup, Board, List, Info } from './index.js';
 import './main.css';
 
 class main extends Component {
@@ -23,6 +23,7 @@ class main extends Component {
                 <Route path='/signup' component={Signup} />
                 <Route path='/board' component={Board} />
                 <Route path='/list' component={List} />
+                <Route path='/patientinfo' component={Info} />
 
             </div>
             <div id='Mains-right'>

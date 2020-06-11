@@ -128,7 +128,9 @@ class header extends Component {
         </div>
             <div className='Mainmenubar'>
                 <div id='Mainmenubar-first'>
-                    <h2>환자 정보 확인</h2>
+                {this.state.login ?
+                  <Link className='link_tit' to='/patientinfo'><h2>환자 정보 확인</h2></Link>
+                : <h2>환자 정보 확인</h2>}
                 </div>
                 <div id='Mainmenubar-second'>
                 {this.state.login ?

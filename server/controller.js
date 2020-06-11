@@ -33,12 +33,29 @@ module.exports = {
           },
     },
     get : {
-      board_cnt : (req, res) => {
-        model.get.board_cnt(cnt => {
+      users_cnt : (req, res) => {
+        const body = req.body;
+        model.get.users_cnt(body, cnt => {
           const result = { cnt : cnt }
           res.send(result)
         })
       },     
+
+      board_cnt : (req, res) => {
+        const body = req.body;
+        model.get.board_cnt(body, cnt => {
+          const result = { cnt : cnt }
+          res.send(result)
+        })
+      },   
+      users : (req, res) => {
+        const body = req.body;
+        model.get.users(body, result => {
+          if(result) {
+            res.send(result);
+          }
+        })
+      },  
 
       board : (req, res) => {
         const body = req.body;

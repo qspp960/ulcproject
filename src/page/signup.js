@@ -94,6 +94,10 @@ class Signup extends Component {
       <div>
         <h2 id='signup_title'> 회원가입 </h2>
       </div>
+      <div>
+        <h4 id='signup_title'> 회원가입은 병원관계자만 가능하며 승인 완료 후 활동 가능합니다</h4>
+      </div>
+      
       <div className='Signup'>
         <div>
           <div>

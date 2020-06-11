@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './main.css';
-
+import { Search } from './index.js';
 import axios from 'axios';
+import queryString from 'query-string';
 
 class list extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class list extends Component {
       page : 1,
       limit : 10,
       all_page : [],
+      search : "",
     }
   }
 
@@ -22,21 +24,32 @@ class list extends Component {
   _getListData = async function() {
     const { limit } = this.state;
     const page = this._setPage();
+    let search = queryString.parse(this.props.location.search);
     
-    //데이터 가져오기
-    const total_cnt = await axios('/get/board_cnt');
-    console.log(total_cnt.data.cnt);
+    if(search) {
+      search = search.search;
+      
+    }
+    
 
+
+    //테이블 데이터 수
+    const total_cnt = await axios('/get/board_cnt',{
+      method : 'POST',
+      headers: new Headers(),
+      data : { search : search }
+    });
+    //데이터 가져오기
     const total_list = await axios('/get/board', {
       method : 'POST',
       headers: new Headers(),
-      data : { limit : limit, page : page }
+      data : { limit : limit, page : page, search : search }
     })
     let page_arr = [];
     for(let i = 1; i <= Math.ceil(total_cnt.data.cnt / limit); i++) {
         page_arr.push(i);}
     console.log(page_arr+"~~~page_arr!!!!!!!!!!!!!");
-    this.setState({ data : total_list, all_page : page_arr });
+    this.setState({ data : total_list, all_page : page_arr, search : search });
   }
   
   _changePage = function(el) {
@@ -58,7 +71,7 @@ class list extends Component {
   
   render() {
     const list = this.state.data.data;
-    const { all_page, page } = this.state;
+    const { all_page, page, search } = this.state;
     
     return (
       <div className='List'>
@@ -69,7 +82,7 @@ class list extends Component {
           <div > 날짜 </div>
         </div>
 
-          {list ? list.map( (el, key) => {
+          {list && list.length>0 ? list.map( (el, key) => {
             return(
               <div className='list_grid list_data' key={key}>
                 <div> {el.contents} </div>
@@ -78,7 +91,12 @@ class list extends Component {
               </div>
             )
           })
-            : null }
+            :  <div className='not_data acenter'>
+                {search !== "" ? <div> 검색된 결과가 없습니다. </div> // 검색 사용
+                              : <div> 데이터가 없습니다. </div> // 검색 사용 X
+                }
+                </div>
+              }
         <div className='paging_div'>
             <div> </div>
             <div>
@@ -92,6 +110,9 @@ class list extends Component {
                 
                 : null}
               </ul>
+              <Search
+                search = {search}
+              />
             </div>
             <div> </div>
           </div>

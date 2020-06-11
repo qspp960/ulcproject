@@ -5,3 +5,6 @@ export { default as Signup } from './signup';
 export { default as Board } from './board';
 export { default as View } from './view';
 export { default as List } from './list';
+export { default as Info } from './patientinfo';
+export { default as Search } from './search';
+export { default as SearchPatient } from './searchpatient';

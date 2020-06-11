@@ -37,5 +37,6 @@ let sequelize = new Sequelize(
     db.Homepageusers = require('./homepageusers')(sequelize, Sequelize);
     db.Alltimelist = require('./alltimelist')(sequelize, Sequelize);
     db.Boards = require('./board')(sequelize, Sequelize);
+    db.Users = require('./users')(sequelize, Sequelize);
     db.secret = '(9*)5$&dfds!3%^0%^@@2$1!#5@2sdf!4';
 module.exports = db;
