@@ -183,3 +183,50 @@ input[name=signup_email_write] {
 }
 
 #signup_section { border-left: solid 1px #ababab; }
+
+.List {
+    padding: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 500px;
+}
+
+.list_tit {
+    border-bottom: solid 3px #ababab;
+    margin-bottom: 3px;
+    
+}
+
+.list_grid {
+    display: grid;
+    grid-template-columns: 60% 15% 25%;
+}
+
+.list_data {
+    line-height: 40px;
+}
+
+.acenter {
+    text-align: center;}
+
+.paging_div {
+        margin-top: 10px;
+        border-top: solid 1px #ababab;
+        display: grid;
+        grid-template-columns: 25% 50% 25%;
+        text-align: center;
+ }
+    
+.paging_div div {
+        padding : 15px;
+        text-align: center;
+}
+    
+.page_num {
+        margin-right: 20px;
+        list-style: none;
+        display : inline-block;
+        cursor: pointer;
+}
+
+

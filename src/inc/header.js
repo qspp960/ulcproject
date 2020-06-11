@@ -141,7 +141,9 @@ class header extends Component {
                 : <h2>게시판</h2>}
                 </div>
                 <div id='Mainmenubar-fourth'>
-                      <h2>이전 데이터 확인</h2>
+                {this.state.login ?
+                  <Link className='link_tit' to='/list'><h2>이전 데이터 확인</h2></Link>
+                : <h2>이전 데이터 확인</h2>}
                 </div>
             </div>
         </div>

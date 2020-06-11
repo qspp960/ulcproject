@@ -32,6 +32,24 @@ module.exports = {
             console.log('2. hash 결과 : ', hash);
           },
     },
+    get : {
+      board_cnt : (req, res) => {
+        model.get.board_cnt(cnt => {
+          const result = { cnt : cnt }
+          res.send(result)
+        })
+      },     
+
+      board : (req, res) => {
+        const body = req.body;
+        model.get.board(body, result => {
+          if(result) {
+            res.send(result);
+          }
+        })
+      }
+    },
+
     add : {
       board : (req, res) =>{
         const body = req.body;

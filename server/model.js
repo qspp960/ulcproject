@@ -8,7 +8,7 @@ const {
     Alltimelist,
     Timesetting,
     Homepageusers,
-    Board,
+    Boards,
     Sequelize: { Op }
 } = require('./models');
 sequelize.query('SET NAMES utf8');
@@ -39,6 +39,28 @@ module.exports = {
         }
 
     },
+    get : {
+        board_cnt : (callback) => {
+            Boards.count()
+            .then(result => {
+              callback(result);
+            })
+          },
+        board : (body, callback) => {
+            Boards.findAll({
+                limit : (body.page * body.limit),
+                offset : (body.page - 1) * body.limit,
+                order: sequelize.literal('board_id DESC')
+              })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        }
+    },
+
     delete : {
         delOverlap : (body, callback) =>{
             Timesetting.destroy({
@@ -54,7 +76,7 @@ module.exports = {
     },
     add : {
         board : (body, callback) =>{
-            Board.create({
+            Boards.create({
                 patient_id: body.patient_id,
                 patientname : body.patientname,
                 contents : body.contents,
