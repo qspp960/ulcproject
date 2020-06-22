@@ -10,6 +10,7 @@ const {
     Homepageusers,
     Boards,
     Users,
+    MedicRecords,
     Sequelize: { Op }
 } = require('./models');
 sequelize.query('SET NAMES utf8');
@@ -41,6 +42,24 @@ module.exports = {
 
     },
     get : {
+        medicrecords_cnt : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+    
+            MedicRecords.count({
+                where : {
+                    PatientName : {
+                        [Op.like] : search
+                    }
+                }
+            })
+            .then(result => {
+              callback(result);
+            })
+          },
         users_cnt : (body, callback) => {
             let search = "%%";
 
@@ -61,6 +80,30 @@ module.exports = {
               console.log("users 카운트"+ result);
             })
           },
+          medicrecords : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+            
+            MedicRecords.findAll({
+                where : {
+                    PatientName : {
+                        [Op.like] : search
+                    },
+                },
+                    limit : (body.page * body.limit),
+                    offset : (body.page - 1) * body.limit,
+                    order: sequelize.literal('patient_id ASC')
+                })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
           users : (body, callback) => {
             let search = "%%";
 

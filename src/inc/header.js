@@ -91,10 +91,10 @@ class header extends Component {
             <Link className='link_tit' to='/'><img src={imgtitle} /></Link>
           </div>
             <div className='acenter_login'> 
-            {this.state.login ? <Link className='link_tit' to='/'><h3 className='btn_cursor' onClick={() => this._logout()}> 로그아웃 </h3></Link>
+            {this.state.login ? <Link className='link_tit' to='/'><h4 className='btn_cursor' onClick={() => this._logout()}> 로그아웃 </h4></Link>
                   : <div className='menu'>
-                      <li><h3 className='btn_cursor' onClick={() => this._openModal()}>로그인</h3></li>
-                      <li><h3> <Link className='link_tit' to='/signup'> 회원가입</Link></h3></li>
+                      <li><h4 className='btn_cursor' onClick={() => this._openModal()}>로그인</h4></li>
+                      <li><h4> <Link className='link_tit' to='/signup'> 회원가입</Link></h4></li>
                     </div>
             }
             <Modal visible={this.state.visible} 
@@ -129,23 +129,23 @@ class header extends Component {
             <div className='Mainmenubar'>
                 <div id='Mainmenubar-first'>
                 {this.state.login ?
-                  <Link className='link_tit' to='/patientinfo'><h2>환자 정보 확인</h2></Link>
-                : <h2>환자 정보 확인</h2>}
+                  <Link className='link_tit' to='/patientinfo'><h3>환자 정보 확인</h3></Link>
+                : <h3>환자 정보 확인</h3>}
                 </div>
                 <div id='Mainmenubar-second'>
                 {this.state.login ?
-                  <Link className='link_tit' to='/write'><h2>데이터 입력</h2></Link>
-                : <h2>데이터 입력</h2>}
+                  <Link className='link_tit' to='/write'><h3>데이터 입력</h3></Link>
+                : <h3>데이터 입력</h3>}
                 </div>
                 <div id='Mainmenubar-third'> 
                 {this.state.login ?
-                  <Link className='link_tit' to='/board'><h2>게시판</h2></Link>
-                : <h2>게시판</h2>}
+                  <Link className='link_tit' to='/board'><h3>게시판</h3></Link>
+                : <h3>게시판</h3>}
                 </div>
                 <div id='Mainmenubar-fourth'>
                 {this.state.login ?
-                  <Link className='link_tit' to='/list'><h2>이전 데이터 확인</h2></Link>
-                : <h2>이전 데이터 확인</h2>}
+                  <Link className='link_tit' to='/list'><h3>이전 데이터 확인</h3></Link>
+                : <h3>이전 데이터 확인</h3>}
                 </div>
             </div>
         </div>

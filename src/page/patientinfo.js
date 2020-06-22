@@ -78,6 +78,7 @@ class info extends Component {
           <div> 환자이름 </div>
           <div> 환자아이디 </div>
           <div> 환자이메일 </div>
+          <div> 환자전화번호 </div>
         </div>
 
           {list && list.length>0 ? list.map( (el, key) => {
@@ -87,6 +88,7 @@ class info extends Component {
                 <div> {el.UserName}</div>
                 <div> {el.UserId}</div>
                 <div> {el.UserEmail} </div>
+                <div> {el.UserPhone} </div>
               </div>
             )
           })

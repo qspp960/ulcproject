@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(30),
         allowNull : true,
       },
+      UserPhone : {
+        type: DataTypes.STRING(30),
+        allowNull : true,
+      },
+      UserMac : {
+        type: DataTypes.STRING(30),
+        allowNull : true,
+      },
        
       },
       {

@@ -31,16 +31,14 @@ class list extends Component {
       
     }
     
-
-
     //테이블 데이터 수
-    const total_cnt = await axios('/get/board_cnt',{
+    const total_cnt = await axios('/get/medicrecords_cnt',{
       method : 'POST',
       headers: new Headers(),
       data : { search : search }
     });
     //데이터 가져오기
-    const total_list = await axios('/get/board', {
+    const total_list = await axios('/get/medicrecords', {
       method : 'POST',
       headers: new Headers(),
       data : { limit : limit, page : page, search : search }
@@ -77,17 +75,19 @@ class list extends Component {
       <div className='List'>
 
         <div className='list_grid list_tit'>
-          <div> 내용 </div>
+          <div> 환자아이디 </div>
           <div> 환자이름 </div>
-          <div > 날짜 </div>
+          <div> 복용 약 이름 </div>
+          <div> 복용 약 시각</div>
         </div>
 
           {list && list.length>0 ? list.map( (el, key) => {
             return(
               <div className='list_grid list_data' key={key}>
-                <div> {el.contents} </div>
-                <div> {el.patientname}</div>
-                <div> {el.date.slice(0, 10)} </div>
+                <div> {el.Patient_Id} </div>
+                <div> {el.PatientName}</div>
+                <div> {el.MedicName}</div>
+                <div> {el.TakingTime} </div>
               </div>
             )
           })

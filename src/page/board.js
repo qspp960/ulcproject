@@ -19,7 +19,7 @@ class board extends Component {
     if(patientid_board === "" ){
         return alert('환자 번호를 입력하시오.');
     }else if(patientname_board === ""){
-        return alert('환자 이름을 입력하시오.');
+        return alert('환자 아이디를 입력하시오.');
     }else if(contents === ""){
         return alert('복용 약 이름을 입력하시오.');
     }
@@ -46,7 +46,7 @@ class board extends Component {
         </div>
 
         <div>
-          <input type='text' name='patientname_board' id='patient_name_board' placeholder="보낼 환자 이름"/>
+          <input type='text' name='patientname_board' id='patient_name_board' placeholder="보낼 환자 아이디"/>
         </div>
 
         <div>
@@ -54,7 +54,7 @@ class board extends Component {
         </div>
 
         <div id='post_submit'>
-            <button onClick={() => this._submitBoard()}><h2>등록</h2></button>
+            <button onClick={() => this._submitBoard()}><h3>등록</h3></button>
           </div>
 
 

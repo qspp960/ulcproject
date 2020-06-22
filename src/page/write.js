@@ -46,27 +46,27 @@ class write extends Component {
         <div className="Write">
             
           <div>
-              <h2>환자 번호</h2>
+              <h3>환자 번호</h3>
               <input type='text' name='patient_id' id='patient_id'/>
           </div>
 
           <div>
-              <h2>환자 이름</h2>
+              <h3>환자 이름</h3>
               <input type='text' name='patientname' id='patientname'/>
           </div>
 
           <div>
-              <h2>복용 약 이름</h2>
+              <h3>복용 약 이름</h3>
               <input type='text' name='medName' id='medName'/>
           </div>
 
           <div>
-              <h2>복용 약 주기</h2>
+              <h3>복용 약 주기</h3>
               <input type='text' name='medTime' id='medTime'/>
           </div>
 
           <div id='post_submit'>
-            <button onClick={() => this._submitwrite()}><h2>등록</h2></button>
+            <button onClick={() => this._submitwrite()}><h3>등록</h3></button>
           </div>
 
         </div>

@@ -47,7 +47,16 @@ module.exports = {
           const result = { cnt : cnt }
           res.send(result)
         })
-      },   
+      },
+      
+      medicrecords_cnt : (req, res) => {
+        const body = req.body;
+        model.get.medicrecords_cnt(body, cnt => {
+          const result = { cnt : cnt }
+          res.send(result)
+        })
+      }, 
+
       users : (req, res) => {
         const body = req.body;
         model.get.users(body, result => {
@@ -55,7 +64,15 @@ module.exports = {
             res.send(result);
           }
         })
-      },  
+      },
+      medicrecords : (req, res) => {
+        const body = req.body;
+        model.get.medicrecords(body, result => {
+          if(result) {
+            res.send(result);
+          }
+        })
+      },
 
       board : (req, res) => {
         const body = req.body;

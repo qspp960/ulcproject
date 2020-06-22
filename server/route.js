@@ -6,9 +6,10 @@ router.post('/add/timesetting',controller.add.timesetting);
 router.post('/send/pw',controller.api.sendPw);
 router.post('/add/homepageusers',controller.add.homepageusers);
 router.post('/add/board',controller.add.board);
-router.post('/get/board', controller.get.board);
+router.post('/get/board', controller.get.medicrecords);
 router.post('/get/users', controller.get.users);
+router.post('/get/medicrecords', controller.get.medicrecords);
 router.post('/get/users_cnt',controller.get.users_cnt);
 router.post('/get/board_cnt', controller.get.board_cnt);
-
+router.post('/get/medicrecords_cnt', controller.get.medicrecords_cnt);
 module.exports = router;

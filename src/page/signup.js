@@ -92,34 +92,29 @@ class Signup extends Component {
     return (
       <div>
       <div>
-        <h2 id='signup_title'> 회원가입 </h2>
+        <h1 id='signup_title'> REGISTER</h1>
       </div>
-      <div>
-        <h4 id='signup_title'> 회원가입은 병원관계자만 가능하며 승인 완료 후 활동 가능합니다</h4>
-      </div>
-      
+  
       <div className='Signup'>
         <div>
           <div>
             <h3> 아이디 </h3>
-            <input type='text' maxLength='20' name='signup_id'/>
+            <input type='text' maxLength='20' name='signup_id' placeholder="영문자로 시작하는 6~20자로 입력해주세요"/>
           </div>
 
           <div>
             <h3> 비밀번호 </h3>
-            <input type='password' maxLength='15' name='signup_password'/>
+            <input type='password' maxLength='15' name='signup_password' placeholder="영문자로 시작하는 6~20자로 입력해주세요"/>
           </div>
 
           <div>
             <h3> 비밀번호 확인 </h3>
             <input type='password' maxLength='15' name='signup_pswCheck'/>
           </div>
-        </div>
 
-        <div id='signup_section'>
           <div>
             <h3> 이름 </h3>
-            <input type='text' maxLength='10' name='signup_name'/>
+            <input type='text' maxLength='10' name='signup_name' placeholder="최소 2글자 이상 입력해주세요"/>
           </div>
 
           <div>
@@ -141,11 +136,14 @@ class Signup extends Component {
 
           </div>
         </div>
-      </div>
-
-      <div>
+        <div>
       <input type='button' value='가입하기' name='sigunup_submit' onClick={() => this._signup()}/>
       </div>
+      </div>
+
+     
+
+    
     </div>
     );
   }
