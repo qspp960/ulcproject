@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define(
-      'users',
+      'Users',
       {
         UserId: {
          type: DataTypes.STRING(30),

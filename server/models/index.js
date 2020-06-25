@@ -32,12 +32,12 @@ let sequelize = new Sequelize(
     .catch(err => {
         console.log('UNABLE TO CONNECT DB!! -> ', err);
     });
-    db.Admin = require('./admin')(sequelize,Sequelize);
-    db.Timesetting = require('./timesetting')(sequelize,Sequelize);
-    db.Homepageusers = require('./homepageusers')(sequelize, Sequelize);
-    db.Alltimelist = require('./alltimelist')(sequelize, Sequelize);
-    db.Boards = require('./board')(sequelize, Sequelize);
-    db.Users = require('./users')(sequelize, Sequelize);
-    db.MedicRecords = require('./medicrecords')(sequelize, Sequelize);
+    db.Admin = require('./Admin')(sequelize,Sequelize);
+    db.Timesetting = require('./TimeSetting')(sequelize,Sequelize);
+    db.Homepageusers = require('./Homepageusers')(sequelize, Sequelize);
+    db.Alltimelist = require('./Alltimelist')(sequelize, Sequelize);
+    db.Boards = require('./Board')(sequelize, Sequelize);
+    db.Users = require('./Users')(sequelize, Sequelize);
+    db.MedicRecords = require('./MedicRecords')(sequelize, Sequelize);
     db.secret = '(9*)5$&dfds!3%^0%^@@2$1!#5@2sdf!4';
 module.exports = db;

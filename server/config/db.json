@@ -2,9 +2,9 @@
 {
     "development" : {
         "username": "root",
-        "password": "ranch0104",
+        "password": "root",
         "database": "caringrobot",
-        "host": "localhost",
+        "host": "13.209.88.95",
         "port": "3306",
         "dialect": "mysql"
     },
