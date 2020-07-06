@@ -17,6 +17,7 @@ sequelize.query('SET NAMES utf8');
 
 module.exports = {
     api : {
+        //홈페이지 users 아이디와 비밀번호에 맞는 튜플 있는지
         searchInfo : (body, hash, callback) => {
             Homepageusers.findAll({
                 where : { [Op.and]: [{ id : body.id, password : hash }] }
@@ -28,6 +29,7 @@ module.exports = {
                 throw err;
             })
         },
+        //약 복용 데이터 찾기
         searchOverlap : (body, callback) =>{
             Timesetting.findAll({
                 where : { [Op.and]: [{patient_id: body.patient_id, patientname: body.patientname, medName: body.medName }]}
@@ -42,6 +44,7 @@ module.exports = {
 
     },
     get : {
+        //약 복용 데이터 튜플 수 count
         medicrecords_cnt : (body, callback) => {
             let search = "%%";
 
@@ -60,6 +63,7 @@ module.exports = {
               callback(result);
             })
           },
+        //사용자 데이터 튜플 수 count
         users_cnt : (body, callback) => {
             let search = "%%";
 
@@ -80,10 +84,11 @@ module.exports = {
               console.log("users 카운트"+ result);
             })
           },
+          //약 복용 데이터 전부 가져오기
           medicrecords : (body, callback) => {
             let search = "%%";
 
-            if(body.search) {
+            if(body.search) {//만약 search값있으면 search값만 찾기
                 search = '%' + body.search + '%';
             }
             
@@ -104,10 +109,11 @@ module.exports = {
                 throw err;
             })
         },
+        // 사용자 데이터 전부 가져오기 
           users : (body, callback) => {
             let search = "%%";
 
-            if(body.search) {
+            if(body.search) {//만약 search값있으면 search값만 찾기
                 search = '%' + body.search + '%';
             }
             
@@ -128,6 +134,7 @@ module.exports = {
                 throw err;
             })
         },
+        //게시판 튜플 수 count
         board_cnt : (body, callback) => {
             let search = "%%";
 
@@ -146,11 +153,12 @@ module.exports = {
               callback(result);
             })
           },
+          //게시판 전부 가져오기 
         board : (body, callback) => {
             let search = "%%";
 
-            if(body.search) {
-                search = '%' + body.search + '%';
+            if(body.search) {//만약 search값있으면 search값만 찾기
+                search = '%' + body.search + '%'; 
             }
             
             Boards.findAll({
@@ -172,7 +180,7 @@ module.exports = {
         }
     },
 
-    delete : {
+    delete : { //timesetting 입력 값과 같은 값있으면 삭제
         delOverlap : (body, callback) =>{
             Timesetting.destroy({
                 where :{ [Op.and]: [{patient_id: body.patient_id, patientname: body.patientname, medName: body.medName }]}
@@ -186,6 +194,7 @@ module.exports = {
         }
     },
     add : {
+        //게시판 추가
         board : (body, callback) =>{
             Boards.create({
                 patient_id: body.patient_id,
@@ -200,6 +209,7 @@ module.exports = {
                 throw err;
             })
         },
+        // 사용자 추가
         homepageusers : (body, hash_pw, now, callback) => {
             Homepageusers.count({
                 where : { id : body.id }
@@ -222,6 +232,7 @@ module.exports = {
                 }
             })
         },
+        //약 주기 입력 값 추가
         timesetting : (body, callback) => {
 
             Timesetting.create({

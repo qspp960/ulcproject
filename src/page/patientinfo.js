@@ -9,8 +9,8 @@ class info extends Component {
     super(props)
     this.state = {
       data : [],
-      page : 1,
-      limit : 10,
+      page : 1, //1장에
+      limit : 7, //7 튜플이 최대 출력
       all_page : [],
       search : "",
     }
@@ -30,31 +30,33 @@ class info extends Component {
     }
     console.log(search);
     
-    //데이터 가져오기
+    //데이터 개수 가져오기 
     const total_cnt = await axios('/get/users_cnt',{
       method : 'POST',
       headers : new Headers(),
       data : {search : search}
     });
 
-
+    //데이터 가져오기
     const total_list = await axios('/get/users', {
       method : 'POST',
       headers: new Headers(),
       data : { limit : limit, page : page, search : search }
     })
+    //page에 10개의 튜플만 출력, 이후 다음장으로 넘어가도록 구현
     let page_arr = [];
     for(let i = 1; i <= Math.ceil(total_cnt.data.cnt / limit); i++) {
         page_arr.push(i);}
     this.setState({ data : total_list, all_page : page_arr, search : search });
   }
-  
+  //페이지를 클릭했을때 페이지 변경하는 함수
   _changePage = function(el) {
     this.setState({ page : el })
     sessionStorage.setItem('page', el);
 
     return this._getListData();
   }
+  //새로고침을 하였을때 state값 초기화를 방지하기 위함
   _setPage = function() {
     if(sessionStorage.page) {
       this.setState({ page : Number(sessionStorage.page) })
@@ -65,7 +67,7 @@ class info extends Component {
     return 1;
   }
 
-  
+  //프론트 구성
   render() {
     const list = this.state.data.data;
     const { all_page, page, search } = this.state;

@@ -35,77 +35,80 @@
 }
 
 #patient_id_board {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #patient_id_board:focus { outline : none; }
 
 #patient_name_board {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #patient_name_board:focus { outline : none; }
 
 #content_txt {
-    width: 91%;
-    font-size: 20px;
+    width: 80px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 110px;
     resize: none;
     border: none;
     height: 200px;
+    
 }
 
 #content_txt:focus { outline : none; }
 
 #patient_id {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #patient_id:focus { outline : none; }
 
 #patientname {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #patientname:focus { outline : none; }
 
 #medName {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #medName:focus { outline : none; }
 
 #medTime {
-    width: 91%;
+    width: 80px;
     height: 40px;
     border: none;
-    font-size: 20px;
-    border-bottom: solid 1px #4f99b6;
+    font-size: 15px;
     font-weight: bold;
+    margin-right: 110px;
 }
 
 #medTime:focus { outline : none; }
@@ -116,15 +119,9 @@
 }
 
 #post_submit button {
-    width: 80px;
     margin-right: 100px;
-    padding: 2px;
-    border-radius: 5px;
-    border: solid 1px #4f99b6;
-    font-weight: bold;
-    font-size: 15px;
+    
     cursor: pointer;
-    background-color: white;
 }
 
 
@@ -132,14 +129,13 @@
 .link_tit {
     color : black;
     text-decoration: none;
-
   }
 
 
 
 #signup_title {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 20px;
     padding-bottom: 10px;
 
 }
@@ -148,6 +144,7 @@
 
 .Signup div {
     text-align: center;
+    margin: 10px;
 }
 
 .Signup div input { padding: 3px; }
@@ -155,50 +152,59 @@
 input[name=signup_id]{
     width: 300px;
     height: 30px;
-    border: solid 1px #4f99b6;
+    font-size: 10px;
+    border: solid 1px #ababab;
     border-radius: 3px;
 }
 input[name=signup_password]{
     border-radius: 3px;
     width: 300px;
+    font-size: 10px;
     height: 30px;
-    border: solid 1px #4f99b6;
+    border: solid 1px #ababab;
 }
 input[name=signup_pswCheck]{
     border-radius: 3px;
     width: 300px;
+    font-size: 10px;
     height: 30px;
-    border: solid 1px #4f99b6;
+    border: solid 1px #ababab;
 }
 input[name=signup_name]{
     border-radius: 3px;
     width: 300px;
+    font-size: 10px;
     height: 30px;
-    border: solid 1px #4f99b6;
+    border: solid 1px #ababab;
 }
 input[name=signup_birthday] { 
     width: 80px;
     border-radius: 3px;
     width: 215px;
+    font-size: 10px;
     height: 30px;
-    border: solid 1px #4f99b6;
+    border: solid 1px #ababab;
 } 
 input[name=signup_sex] { width: 10px; 
     margin-left: 5px;
     width: 20px;
     height: 30px;
+    font-size: 10px;
     border-radius: 3px;
-    border: solid 1px #4f99b6;}
+    border: solid 1px #ababab;}
 input[name=signup_email] { 
     border-radius: 3px;
-    width: 185px;
+    width: 200px;
+    font-size: 10px;
     height: 30px;
-    border: solid 1px #4f99b6;}
+    border: solid 1px #ababab;}
 select[name=signup_email_select] { 
     padding: 3px; margin-left: 5px;
     border-radius: 3px;
+    font-size: 10px;
     height: 35px;
-    border: solid 1px #4f99b6; 
+
+    border: solid 1px #ababab; 
 }
 
 input[name=sigunup_submit] { 
@@ -218,9 +224,14 @@ input[name=signup_email_write] {
     margin-top: 10px;
     margin-left: 30px;
     width: 10%;
-    border: solid 1px #4f99b6; 
+    font-size: 10px;
+    border: solid 1px #ababab; 
     border-radius: 3px;
     height: 30px;
+}
+
+.signupbtn{
+    margin-top: 45px;
 }
 
 
@@ -228,6 +239,7 @@ input[name=signup_email_write] {
     padding: 30px;
     margin-left: 20px;
     margin-right: 20px;
+    font-size: 15px;
     min-height: 500px;
 }
 
@@ -240,11 +252,13 @@ input[name=signup_email_write] {
 .list_grid {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
+    font-size: 13px;
 }
 
 .listpatient_grid {
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 15% 20% 20% 23% 22%;
+    font-size: 13px;
 }
 
 .list_data {
@@ -279,12 +293,17 @@ input[name=signup_email_write] {
     padding: 2px;
     margin-right: 5px;
     margin-top: 15px;
-    width: 50%;
+    font-size: 15x;
+    border: 1px solid #ababab;
+    border-radius: 3px;
+    width: 65%;
 }
 
 .serach_submit {
     position: absolute;
     margin-top: 14px;
+    font-size:10px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -292,4 +311,7 @@ input[name=signup_email_write] {
     margin-top: 10px;
     margin-bottom: 10px;
     color: #ababab;
+}
+.mainpadding {
+    margin-top: 80px;
 }

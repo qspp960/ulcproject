@@ -1,8 +1,8 @@
 
 {
     "development" : {
-        "username": "root",
-        "password": "ranch0104",
+        "username": "root", 
+        "password": "ranch0104", 
         "database": "caringrobot",
         "host": "localhost",
         "port": "3306",

@@ -10,7 +10,7 @@ class list extends Component {
     this.state = {
       data : [],
       page : 1,
-      limit : 10,
+      limit : 7,
       all_page : [],
       search : "",
     }
@@ -49,13 +49,14 @@ class list extends Component {
     console.log(page_arr+"~~~page_arr!!!!!!!!!!!!!");
     this.setState({ data : total_list, all_page : page_arr, search : search });
   }
-  
+  //페이지바꾸기 눌렀을시
   _changePage = function(el) {
     this.setState({ page : el })
     sessionStorage.setItem('page', el);
 
     return this._getListData();
   }
+  //페이지 번호 설정
   _setPage = function() {
     if(sessionStorage.page) {
       this.setState({ page : Number(sessionStorage.page) })

@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Signup extends Component {
   constructor(props){
@@ -11,7 +13,7 @@ class Signup extends Component {
     }
   }
 
-  _changeEmailSelect = function() {
+  _changeEmailSelect = function() { //이메일 선택
     const select = document.getElementsByName('signup_email_select')[0].value;
 
     if(select === 'write') {
@@ -21,7 +23,7 @@ class Signup extends Component {
     }
   }
 
-  _signup = async function() {
+  _signup = async function() { 
 
     const id = document.getElementsByName('signup_id')[0].value.trim();
     const password = document.getElementsByName('signup_password')[0].value.trim();
@@ -38,12 +40,12 @@ class Signup extends Component {
       email_select = document.getElementsByName('signup_email_write')[0].value.trim();
     }
     const email = email_first + '@' + email_select;
-    const eng_check = /^[a-z]+[a-z0-9]{5,19}$/g;
+    const eng_check = /^[a-z]+[a-z0-9]{5,19}$/g; //이메일 값 확인
     if(!eng_check.test(id)) {
       return alert('아이디는 영문자로 시작하는 6~20자여야만 합니다.')
       
     }
-    
+    // 비밀번호 확인
     const pw_check = /^[a-z]+[a-z0-9]{5,19}$/g;
     if(!pw_check.test(password)) {
       return alert('비밀번호는 영문자로 시작하는 6~20자여야만 합니다.')
@@ -51,6 +53,7 @@ class Signup extends Component {
     } else if(password !== psw_check) {
       return alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.')
     }
+    //이름 생년월일 확인
     if(name.length === 0 || name.length < 2) {
       return alert('이름은 최소 2글자 이상 입력해야 합니다.');
 
@@ -62,7 +65,7 @@ class Signup extends Component {
     }
 
     const email_check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
+    //이메일 형식 확인
     if(!email.match(email_check)) {
        return alert('올바른 이메일 형식을 입력해주세요.');
     }    
@@ -72,13 +75,13 @@ class Signup extends Component {
         birthday : birthday, 
         sex : sex, 
         email : email };
-
+        //회원가입데이터베이스에 입력값 전송
       const add_user = await axios('/add/homepageusers', {
         method : 'POST',
         headers: new Headers(),
         data : data
       })
-
+      //반환된 값이 이미 존재하는 아이디일시
       if(!add_user) {
         return alert('이미 존재하는 아이디입니다.');
       } else {
@@ -92,39 +95,39 @@ class Signup extends Component {
     return (
       <div>
       <div>
-        <h1 id='signup_title'> REGISTER</h1>
+        <h4 id='signup_title'> REGISTER</h4>
       </div>
   
       <div className='Signup'>
         <div>
           <div>
-            <h3> 아이디 </h3>
+            <h6> 아이디 </h6>
             <input type='text' maxLength='20' name='signup_id' placeholder="영문자로 시작하는 6~20자로 입력해주세요"/>
           </div>
 
           <div>
-            <h3> 비밀번호 </h3>
+            <h6> 비밀번호 </h6>
             <input type='password' maxLength='15' name='signup_password' placeholder="영문자로 시작하는 6~20자로 입력해주세요"/>
           </div>
 
           <div>
-            <h3> 비밀번호 확인 </h3>
+            <h6> 비밀번호 확인 </h6>
             <input type='password' maxLength='15' name='signup_pswCheck'/>
           </div>
 
           <div>
-            <h3> 이름 </h3>
+            <h6> 이름 </h6>
             <input type='text' maxLength='10' name='signup_name' placeholder="최소 2글자 이상 입력해주세요"/>
           </div>
 
           <div>
-            <h3> 생년월일 </h3>
+            <h6> 생년월일 </h6>
             <input type='text' maxLength='6' name='signup_birthday'/> - 
             <input type='text' maxLength='1' name='signup_sex'/> ******
           </div>
 
           <div>
-            <h3> 이메일 </h3>
+            <h6> 이메일 </h6>
             <input type='text' maxLength='15' name='signup_email'/> @
             <select name='signup_email_select' onChange={()=>this._changeEmailSelect()}>
               <option value='gmail.com'> gmail.com </option>
@@ -137,7 +140,7 @@ class Signup extends Component {
           </div>
         </div>
         <div>
-      <input type='button' value='가입하기' name='sigunup_submit' onClick={() => this._signup()}/>
+        <Button className="signupbtn" variant="light" onClick={() => this._signup()}>가입하기</Button>
       </div>
       </div>
 
