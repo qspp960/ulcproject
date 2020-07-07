@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
-import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import boardinfo from '../image/patientboardinfo.PNG';
 class board extends Component {
   constructor(props) {
     super(props)
@@ -43,6 +43,10 @@ class board extends Component {
   render() {
 
     return (
+      <div>
+        <img src = {boardinfo}
+        width='250'
+        className="boardinfo"/>
       <div className="Write">
         <InputGroup>
         <FormControl
@@ -79,6 +83,7 @@ class board extends Component {
           </div>
 
 
+      </div>
       </div>
     );
   }

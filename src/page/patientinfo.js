@@ -3,6 +3,7 @@ import './main.css';
 import { SearchPatient } from './index.js';
 import axios from 'axios';
 import queryString from 'query-string';
+import patientinfo from '../image/patientinfo.PNG';
 
 class info extends Component {
   constructor(props) {
@@ -73,6 +74,10 @@ class info extends Component {
     const { all_page, page, search } = this.state;
     
     return (
+      <div>
+      <img src = {patientinfo}
+      width='200'
+      className="tableinfo"/>
       <div className='List'>
 
         <div className='listpatient_grid list_tit'>
@@ -117,6 +122,7 @@ class info extends Component {
             </div>
             <div> </div>
           </div>
+      </div>
       </div>
     );
   }

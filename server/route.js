@@ -12,4 +12,6 @@ router.post('/get/medicrecords', controller.get.medicrecords);
 router.post('/get/users_cnt',controller.get.users_cnt);
 router.post('/get/board_cnt', controller.get.board_cnt);
 router.post('/get/medicrecords_cnt', controller.get.medicrecords_cnt);
+router.post('/get/hospitalboard_cnt', controller.get.hospitalboard_cnt);
+router.post('/get/hospitalboard', controller.get.hospitalboard);
 module.exports = router;

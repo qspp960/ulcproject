@@ -3,6 +3,7 @@ import './main.css';
 import axios from 'axios';
 import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import medlogo from '../image/medinfo.PNG';
 
 class write extends Component {
   constructor(props) {
@@ -45,6 +46,10 @@ class write extends Component {
   render() {
 
     return (
+      <div>
+        <img src = {medlogo}
+        width='200'
+        className="boardinfo"/>
         <div className="Write">
           <InputGroup>
           <FormControl
@@ -94,6 +99,7 @@ class write extends Component {
             <Button variant="light" onClick={() => this._submitwrite()}>등록</Button>
           </div>
 
+        </div>
         </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import '../App.css';
+import logo from '../image/logo.PNG';
+
 import Modal from 'react-awesome-modal';
 import axios from 'axios';
 import imgtitle from '../image/title.png';
@@ -86,7 +88,7 @@ class header extends Component {
     return (
         <div className="Navigation">
             <Navbar bg="light" variant="light">
-            <Navbar.Brand href="/">ID's 구급상자 로봇</Navbar.Brand>
+            <Navbar.Brand href="/"><img width="40" height="40" src={logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
             <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-button-drop-down">
@@ -96,7 +98,7 @@ class header extends Component {
             <Dropdown.Menu>
             {this.state.login ?
                   <Dropdown.Item href="/patientinfo">환자 정보 확인</Dropdown.Item>
-                : <Dropdown.Item>환자 정보 확인</Dropdown.Item>}
+                : <Dropdown.Item >환자 정보 확인</Dropdown.Item>}
             {this.state.login ?
                   <Dropdown.Item href="/list">환자 약 데이터 확인</Dropdown.Item>
                 : <Dropdown.Item>환자 약 데이터 확인</Dropdown.Item>}
@@ -120,7 +122,7 @@ class header extends Component {
                   <Dropdown.Item>병원 스케줄</Dropdown.Item>
                 : <Dropdown.Item>병원 스케줄</Dropdown.Item>}
             {this.state.login ?
-                  <Dropdown.Item>병원 게시판</Dropdown.Item>
+                  <Dropdown.Item href="/hospitalboard" >병원 게시판</Dropdown.Item>
                 : <Dropdown.Item>병원 게시판</Dropdown.Item>}
             </Dropdown.Menu>
             </Dropdown>

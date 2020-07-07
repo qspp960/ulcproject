@@ -10,6 +10,7 @@ const {
     Homepageusers,
     Boards,
     Users,
+    Hospitalboards,
     MedicRecords,
     Sequelize: { Op }
 } = require('./models');
@@ -134,6 +135,24 @@ module.exports = {
                 throw err;
             })
         },
+        hospitalboard_cnt : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {
+                search = '%' + body.search + '%';
+            }
+    
+            Hospitalboards.count({
+                where : {
+                    title : {
+                        [Op.like] : search
+                    }
+                }
+            })
+            .then(result => {
+              callback(result);
+            })
+          },
         //게시판 튜플 수 count
         board_cnt : (body, callback) => {
             let search = "%%";
@@ -153,6 +172,30 @@ module.exports = {
               callback(result);
             })
           },
+          hospitalboard : (body, callback) => {
+            let search = "%%";
+
+            if(body.search) {//만약 search값있으면 search값만 찾기
+                search = '%' + body.search + '%'; 
+            }
+            
+            Hospitalboards.findAll({
+                where : {
+                    title : {
+                        [Op.like] : search
+                    }
+                },
+                    limit : (body.page * body.limit),
+                    offset : (body.page - 1) * body.limit,
+                    order: sequelize.literal('board_id DESC')
+                })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
           //게시판 전부 가져오기 
         board : (body, callback) => {
             let search = "%%";
@@ -194,6 +237,7 @@ module.exports = {
         }
     },
     add : {
+        
         //게시판 추가
         board : (body, callback) =>{
             Boards.create({

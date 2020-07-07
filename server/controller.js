@@ -40,6 +40,14 @@ module.exports = {
           const result = { cnt : cnt }
           res.send(result)
         })
+      },
+      
+      hospitalboard_cnt : (req, res) => {
+        const body = req.body;
+        model.get.hospitalboard_cnt(body, cnt => {
+          const result = { cnt : cnt }
+          res.send(result)
+        })
       },     
        //게시판 튜플 수 count model에 요청
       board_cnt : (req, res) => {
@@ -83,7 +91,16 @@ module.exports = {
             res.send(result);
           }
         })
+      },
+      hospitalboard : (req, res) => {
+        const body = req.body;
+        model.get.hospitalboard(body, result => {
+          if(result) {
+            res.send(result);
+          }
+        })
       }
+
     },
 
     add : {
