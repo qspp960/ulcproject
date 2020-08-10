@@ -13,8 +13,8 @@
   .Mains{
     display: grid;
     grid-template-columns: 15% 70% 15%;
-    background-color: #e7e7e7;
-    height: 1000px;
+    background-color: #f5f5f5;
+
   }
   #Mains-left
   #Mains-right 
@@ -25,16 +25,15 @@
 
 .Write {
     padding: 10px;
-    padding-left: 30px;
 
 }
 
 .Write div {
     margin-top: 30px;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
-#patient_id_board {
+#_title_board {
     width: 80px;
     height: 40px;
     border: none;
@@ -43,9 +42,9 @@
     margin-right: 110px;
 }
 
-#patient_id_board:focus { outline : none; }
+#_title_board:focus { outline : none; }
 
-#patient_name_board {
+#_name_board {
     width: 80px;
     height: 40px;
     border: none;
@@ -54,18 +53,31 @@
     margin-right: 110px;
 }
 
-#patient_name_board:focus { outline : none; }
+#_name_board:focus { outline : none; }
 
-#content_txt {
+#_contents_txt {
     width: 80px;
     font-weight: bold;
     font-size: 15px;
     margin-right: 110px;
     resize: none;
     border: none;
-    height: 150px;
+    height: 200px;
     
 }
+
+#content_txt1 {
+    width: 80px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 110px;
+    resize: none;
+    border: none;
+    height: 400px;
+    width: 740px;
+    background-color: #f5f5f5;
+}
+
 
 #content_txt:focus { outline : none; }
 
@@ -116,6 +128,7 @@
 
 #post_submit {
     text-align: center;
+    margin-bottom: 30px;
 }
 
 #post_submit button {
@@ -127,7 +140,13 @@
 
 
 .link_tit {
-    color : black;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .link_tit1 {
+    font-size: 15px;
+    color : white;
     text-decoration: none;
   }
 
@@ -249,8 +268,9 @@ input[name=signup_email_write] {
     
 }
 
-.listhospital_grid {
+.listreview_grid {
     display: grid;
+    padding-left: 15px;
     grid-template-columns: 65% 15% 20%;
     font-size: 13px;
 }
@@ -299,13 +319,14 @@ input[name=signup_email_write] {
     padding: 2px;
     margin-right: 5px;
     margin-top: 15px;
+    padding-left: 8px;
     font-size: 15x;
     border: 1px solid #ababab;
     border-radius: 3px;
     width: 65%;
 }
 
-.serach_submit {
+.search_submit {
     position: absolute;
     margin-top: 14px;
     font-size:10px;
@@ -321,6 +342,7 @@ input[name=signup_email_write] {
 .mainpadding {
     margin-top: 10px;
     margin-bottom: 10px;
+
 }
 .boardinfo{
     margin-left: 70px;
@@ -330,4 +352,33 @@ input[name=signup_email_write] {
     margin-left: 70px;
     margin-top: 10px;
     margin-left: 45px;
+}
+
+.writebtn{
+    margin-left: 590px;
+    margin-top: 30px;
+    position: absolute;
+    font-size:10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.date_div {
+    text-align: right;
+    font-size: 14px;
+    color: #ababab;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+.top_title #title_txt {
+    border: none;
+    font-size : 20px;
+    font-weight: bold;
+    padding-bottom: 0px;
+    background-color: #f5f5f5;
+}
+
+.top_title {
+    border-bottom: solid 1px #ababab;
 }

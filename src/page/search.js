@@ -18,7 +18,7 @@ class search extends Component {
         <div>
             <form>
               <input type='text' maxLength='20' className='search_input' name='search' placeholder='환자이름을 입력하시오'/>
-              <Button type='submit' className='serach_submit' size="sm" variant="light">검색</Button>
+              <Button type='submit' className='search_submit' size="sm" variant="light">검색</Button>
             </form>
         </div>
     );

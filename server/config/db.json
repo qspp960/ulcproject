@@ -3,7 +3,7 @@
     "development" : {
         "username": "root", 
         "password": "ranch0104", 
-        "database": "caringrobot",
+        "database": "iotdevelopers",
         "host": "localhost",
         "port": "3306",
         "dialect": "mysql"

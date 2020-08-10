@@ -7,7 +7,7 @@ const salt  = require(path.join(__dirname, 'config', 'db.json'))
  const moment = require('moment');
  require('moment-timezone');
  moment.tz.setDefault("Asia/Seoul");
- 
+ const user_ip = require("ip"); //사용자 아이피 가져오기
  const now_date = moment().format('YYYY-MM-DD HH:mm:ss');
 module.exports = {
     needs: () => upload,
@@ -19,12 +19,12 @@ module.exports = {
             model.api.searchInfo(body, hash, result =>{
                 var obj = {};
                 if(result[0]) {//반환값 있으면 로그인 성공
-                    obj['suc'] = true;
-                    obj['msg'] = '로그인 성공';
-     
+                    obj['suc'] = result[0].dataValues;
+                    obj['id'] = result[0].id;
+                    obj['ip'] = user_ip.address();
                   } else { //반환값 없으면 로그인 실패
                     obj['suc'] = false;
-                    obj['msg'] = '로그인 실패';
+                    obj['id'] = '로그인 실패';
                   }
                   
                   res.send(obj);
@@ -33,7 +33,17 @@ module.exports = {
             console.log('2. hash 결과 : ', hash);
           },
     },
-    get : { //사용자 튜플 수 count model에 요청
+    get : { 
+      board_data : (req, res) => {
+        const body = req.body;
+
+        model.get.board_data(body, data => {
+          const result = { data : data }
+          res.send(result);
+          console.log("board_data"+ data[0].writer);
+        })
+      },
+      //사용자 튜플 수 count model에 요청
       users_cnt : (req, res) => {
         const body = req.body;
         model.get.users_cnt(body, cnt => {
@@ -42,9 +52,9 @@ module.exports = {
         })
       },
       
-      hospitalboard_cnt : (req, res) => {
+      reviewboard_cnt : (req, res) => {
         const body = req.body;
-        model.get.hospitalboard_cnt(body, cnt => {
+        model.get.reviewboard_cnt(body, cnt => {
           const result = { cnt : cnt }
           res.send(result)
         })
@@ -92,9 +102,9 @@ module.exports = {
           }
         })
       },
-      hospitalboard : (req, res) => {
+      reviewboard : (req, res) => {
         const body = req.body;
-        model.get.hospitalboard(body, result => {
+        model.get.reviewboard(body, result => {
           if(result) {
             res.send(result);
           }

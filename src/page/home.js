@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import imgscreen from '../image/title.png';
-import imgscreen1 from '../image/img1.PNG';
-import imgscreen2 from '../image/title2.PNG';
-import imgscreen5 from '../image/title3.PNG';
-import imgscreen3 from '../image/doctor1.png';
-import imgscreen4 from '../image/doctor2.png';
-import imgscreen6 from '../image/title4.PNG';
+import main1 from '../image/main6.PNG';
+import main2 from '../image/main5.PNG';
+import medq from '../image/medq.png';
+import medwater from '../image/medwater.png';
 
 import './main.css';
 import { Navbar, Nav, Form, FormControl, Button, Dropdown, CarouselProps, CarouselItem, Carousel, Jumbotron} from 'react-bootstrap';
@@ -24,9 +21,8 @@ class home extends Component {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={imgscreen6}
-          width="300"
-          height="300"
+          src={main1}
+          height="100"
           alt="First slide"
         />
   
@@ -34,9 +30,8 @@ class home extends Component {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={imgscreen2}
-          width="300"
-          height="300"
+          src={main2}
+          height="100"
           alt="Second slide"
         />
   
@@ -44,14 +39,23 @@ class home extends Component {
     
     </Carousel>
 
+    <img
+          className="d-block w-100"
+          src={medq}
+          height="400"
+
+        />
+  
+
+
+
 <Jumbotron>
-<h1>ID's Caring Robot</h1>
+<h1>ID's Health service</h1>
 <p>
-  완화 치료 센터 병원 관계자만 사용 가능합니다.
-  회원가입 후관리자 승인이 완료되면 사용 가능합니다.
+  본 홈페이지는 올바른 약 복용을 장려합니다.
 </p>
 <p>
-  <Button variant="secondary">관리자 문의하기</Button>
+  <Button variant="info">관리자 문의하기</Button>
 </p>
 </Jumbotron>
 </div>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './main.css';
+import {Link} from 'react-router-dom';
 import { Search } from './index.js';
 import axios from 'axios';
 import queryString from 'query-string';
-import medtakeninfo from '../image/medtakeninfo.PNG';
+import listtitle from '../image/listtitle.PNG';
 class list extends Component {
   constructor(props) {
     super(props)
@@ -74,7 +75,7 @@ class list extends Component {
     
     return (
       <div>
-      <img src = {medtakeninfo}
+      <img src = {listtitle}
       width='180'
       className="tableinfo"/>
       <div className='List'>
@@ -87,6 +88,7 @@ class list extends Component {
         </div>
 
           {list && list.length>0 ? list.map( (el, key) => {
+            const view_url ='/view/'+el.board_id;
             return(
               <div className='list_grid list_data' key={key}>
                 <div> {el.Patient_Id} </div>

@@ -47,7 +47,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull : false,
         defaultValue : 0
        },
-
        signup_date: {
         type: DataTypes.DATE,
         allowNull : false

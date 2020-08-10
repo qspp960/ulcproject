@@ -10,7 +10,7 @@ const {
     Homepageusers,
     Boards,
     Users,
-    Hospitalboards,
+    ReviewBoards,
     MedicRecords,
     Sequelize: { Op }
 } = require('./models');
@@ -45,6 +45,18 @@ module.exports = {
 
     },
     get : {
+        board_data : (body, callback) => {
+            ReviewBoards.findAll({
+                where : { board_id : body.id }
+            })
+            .then(data => {
+                callback(data);
+                console.log("board_data"+ data[0].writer);
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
         //약 복용 데이터 튜플 수 count
         medicrecords_cnt : (body, callback) => {
             let search = "%%";
@@ -135,14 +147,14 @@ module.exports = {
                 throw err;
             })
         },
-        hospitalboard_cnt : (body, callback) => {
+        reviewboard_cnt : (body, callback) => {
             let search = "%%";
 
             if(body.search) {
                 search = '%' + body.search + '%';
             }
     
-            Hospitalboards.count({
+            ReviewBoards.count({
                 where : {
                     title : {
                         [Op.like] : search
@@ -172,14 +184,14 @@ module.exports = {
               callback(result);
             })
           },
-          hospitalboard : (body, callback) => {
+          reviewboard : (body, callback) => {
             let search = "%%";
 
             if(body.search) {//만약 search값있으면 search값만 찾기
                 search = '%' + body.search + '%'; 
             }
             
-            Hospitalboards.findAll({
+            ReviewBoards.findAll({
                 where : {
                     title : {
                         [Op.like] : search
@@ -240,11 +252,11 @@ module.exports = {
         
         //게시판 추가
         board : (body, callback) =>{
-            Boards.create({
-                patient_id: body.patient_id,
-                patientname : body.patientname,
-                contents : body.contents,
-                date : now_date
+            ReviewBoards.create({
+                title: body.title_board,
+                writer: body.name_board,
+                contents: body.contents_txt,
+                writetime: now_date
             })
             .then(data =>{
                 callback(true)

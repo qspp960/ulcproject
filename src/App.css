@@ -77,9 +77,13 @@
 
 .acenter_login_tit { 
   text-align : center; 
-  margin-top: 10px;
-  border-bottom: solid 1px #ababab;
-  padding-bottom : 10px
+  padding-top: 10px;
+  border-radius: 3px;
+  color:white;
+  border-bottom: solid 1px #3c99b1;
+  background-color: #338aa0;
+  padding-bottom : 10px;
+  font-size: 20px;
 }
 
 
@@ -104,11 +108,14 @@
 .login_input_div p {
   font-weight: bold;
   margin-bottom : 8px;
+
 }
 
 .login_input_div input {
   width: 92%;
   padding: 4px;
+  border-radius: 3px;
+  border: solid 1px #ababab;
   margin-top: -10px;
 }
 
@@ -134,8 +141,8 @@
 }
  
 .dropdown-toggle {
-  border: 1px solid #ababab;
-  background-color: #ababab;
+  border: 1px solid #6fc1cc;
+  background-color: #6fc1cc;
   margin: 5px;
 }
 

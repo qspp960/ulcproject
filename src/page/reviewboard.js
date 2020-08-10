@@ -3,17 +3,22 @@ import './main.css';
 import { SearchBoard } from './index.js';
 import axios from 'axios';
 import queryString from 'query-string';
-
-
-class hospitalboard extends Component {
+import listtitle from '../image/listtitle.PNG';
+import {Button} from 'react-bootstrap';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Head } from '../inc/index.js';
+class reviewboard extends Component {
     constructor(props) {
         super(props)
+        
+
         this.state = {
           data : [],
           page : 1,
           limit : 7,
           all_page : [],
           search : "",
+          loginid : "",
         }
       }
     
@@ -33,13 +38,13 @@ class hospitalboard extends Component {
         }
         
         //테이블 데이터 수
-        const total_cnt = await axios('/get/hospitalboard_cnt',{
+        const total_cnt = await axios('/get/reviewboard_cnt',{
           method : 'POST',
           headers: new Headers(),
           data : { search : search }
         });
         //데이터 가져오기
-        const total_list = await axios('/get/hospitalboard', {
+        const total_list = await axios('/get/reviewboard', {
           method : 'POST',
           headers: new Headers(),
           data : { limit : limit, page : page, search : search }
@@ -74,18 +79,27 @@ class hospitalboard extends Component {
         const { all_page, page, search } = this.state;
         
         return (
+          
+          <div>
+            
+            <img src = {listtitle}
+      width='130'
+      className="tableinfo"/>
+
+          <Button className ='writebtn' size="sm" variant="light"  href={'/board'}>리뷰작성</Button>
           <div className='List'>
-    
-            <div className='listhospital_grid list_tit'>
+            
+            <div className='listreview_grid list_tit'>
               <div> 제목 </div>
               <div> 작성자 </div>
-              <div> 작성시각</div>
+              <div> {this.props.location.loginid}</div>
             </div>
     
               {list && list.length>0 ? list.map( (el, key) => {
+                const view_url = '/view/'+el.board_id;
                 return(
-                  <div className='listhospital_grid list_data' key={key}>
-                    <div> {el.title} </div>
+                  <div className='listreview_grid list_data' key={key}>
+                    <div> <Link to={view_url}>{el.title}</Link></div>
                     <div> {el.writer}</div>
                     <div> {el.writetime.slice(0, 10)} </div>
                   </div>
@@ -110,6 +124,8 @@ class hospitalboard extends Component {
                     
                     : null}
                   </ul>
+                  
+                  
                   <SearchBoard
                     search = {search}
                   />
@@ -117,11 +133,12 @@ class hospitalboard extends Component {
                 <div> </div>
               </div>
           </div>
+          </div>
         );
       }
     
   }
 
-export default hospitalboard;
+export default reviewboard;
 
 

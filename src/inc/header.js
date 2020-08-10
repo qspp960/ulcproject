@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import logo from '../image/logo.PNG';
-
+import logo1 from '../image/logo1.jpg';
 import Modal from 'react-awesome-modal';
 import axios from 'axios';
 import imgtitle from '../image/title.png';
 import '../page/main.css';
 import { Navbar, Nav, Form, FormControl, Button, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ReviewBoard } from '../page';
+import ReviewBoards  from '../page/reviewboard';
 class header extends Component {
   constructor(props){
       super(props)
@@ -18,7 +20,8 @@ class header extends Component {
           id : "",
           password : "",
           login : false,
-      }
+          loginid : "",
+      } 
   }
   componentDidMount() {
     if(sessionStorage.login) {
@@ -46,7 +49,12 @@ class header extends Component {
         sessionStorage.setItem('login',true);
         this.setState({login:true});
         this._closeModal();
-        return alert('로그인 완료'); 
+        const loginid = res.data.id;
+        this.setState({
+          loginid : loginid
+        });
+        return alert(loginid+'님 로그인 완료'); 
+        
       }else{ //로그인실패
         return alert('아이디 및 비밀번호가 일치하지 않습니다');
       }
@@ -78,64 +86,55 @@ class header extends Component {
   _logout = function() { //로그아웃
     if(window.confirm('로그아웃 하시겠습니까?')) {
       sessionStorage.removeItem('login')
-      this.setState({ login : false })
+      this.setState({ 
+        login : false,
+        loginid : "" })
     }
   }
 
-
   render() {
     console.log('아이디: ' + this.state.id + ' 비밀번호: '+this.state.password);
+
     return (
+        
         <div className="Navigation">
-            <Navbar bg="light" variant="light">
-            <Navbar.Brand href="/"><img width="40" height="40" src={logo}></img></Navbar.Brand>
+      
+            <Navbar bg="info" variant="light">
+            <Navbar.Brand href='/'><img width="45" height="40" src={logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
             <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-button-drop-down">
-            PATIENTS
+            <Dropdown.Toggle variant="info" id="dropdown-button-drop-down">
+            PRODUCT
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-            {this.state.login ?
-                  <Dropdown.Item href="/patientinfo">환자 정보 확인</Dropdown.Item>
-                : <Dropdown.Item >환자 정보 확인</Dropdown.Item>}
-            {this.state.login ?
-                  <Dropdown.Item href="/list">환자 약 데이터 확인</Dropdown.Item>
-                : <Dropdown.Item>환자 약 데이터 확인</Dropdown.Item>}
-            {this.state.login ?
-                  <Dropdown.Item href="/write">환자 약 데이터 입력</Dropdown.Item>
-                : <Dropdown.Item>환자 약 데이터 입력</Dropdown.Item>}
-            {this.state.login ?
-                  <Dropdown.Item href="/board">환자 게시판</Dropdown.Item>
-                : <Dropdown.Item>환자 게시판</Dropdown.Item>}
-            
+              <Dropdown.Item>제품 구매</Dropdown.Item>
+              {this.state.login ?
+              <Dropdown.Item href='/reviewboard'>제품 후기</Dropdown.Item>:
+              <Dropdown.Item> 제품 후기</Dropdown.Item>}
             </Dropdown.Menu>
             </Dropdown>
 
             <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            HOSPITAL
+            <Dropdown.Toggle variant="info" id="dropdown-basic">
+            HEALTH
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-            {this.state.login ?
-                  <Dropdown.Item>병원 스케줄</Dropdown.Item>
-                : <Dropdown.Item>병원 스케줄</Dropdown.Item>}
-            {this.state.login ?
-                  <Dropdown.Item href="/hospitalboard" >병원 게시판</Dropdown.Item>
-                : <Dropdown.Item>병원 게시판</Dropdown.Item>}
+              <Dropdown.Item>영양제 추천</Dropdown.Item>
+              <Dropdown.Item>건강 계산기</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown>
 
             <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            MYPAGE
+            <Dropdown.Toggle variant="info" id="dropdown-basic">
+            MY PAGE
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
             {this.state.login ?
-                  <Dropdown.Item>스케줄 관리</Dropdown.Item>
-                : <Dropdown.Item>스케줄 관리</Dropdown.Item>}
+                  <Dropdown.Item>마이페이지</Dropdown.Item>
+                : <Dropdown.Item>마이페이지</Dropdown.Item>}
             {this.state.login ?
                   <Dropdown.Item>관리자 문의</Dropdown.Item>
                 : <Dropdown.Item>관리자 문의</Dropdown.Item>}
@@ -144,18 +143,20 @@ class header extends Component {
                     
                 </Nav>
                 <div className='acenter_login'> 
-                  {this.state.login ? <Link className='link_tit' to='/'><h6 className='btn_cursor' onClick={() => this._logout()}> 로그아웃 </h6></Link>
+                  {this.state.login ? <Button variant="info" href='/'><h6 onClick={() => this._logout()}>LOGOUT</h6></Button>
                   : <div className='menu'>
-                      <li><h6 className='btn_cursor'onClick={() => this._openModal()}><Link className='link_tit' to="/">로그인</Link></h6></li>
-                      <li><h6> <Link className='link_tit' to='/signup'> 회원가입</Link></h6></li>
+                      <li><h6 className='btn_cursor'onClick={() => this._openModal()}><Button variant="info" >LOGIN</Button></h6></li>
+                      <li><h6> <Button variant="info" href='/signup'>SIGNUP</Button></h6></li>
                     </div>
             }
             <Modal visible={this.state.visible} 
-                       width="400" height="310"
+                       width="400" height="350"
                        effect="fadeInDown" 
                        onClickAway={() => this._closeModal()}>
                   <div>
+
                     <h5 className='acenter_login_tit'> LOGIN </h5>
+                    <img width="45" height="40" src={logo1}></img>
                     <form>
                     <div className='login_div'>
                       <div className='login_input_div'>
@@ -169,10 +170,10 @@ class header extends Component {
                       </div>
 
                       <div className='submit_div'>
-                        <Button variant="outline-secondary"  size="sm"  onClick={() => this._selectUserData()}>로그인</Button>
+                        <Button variant="info"  size="sm"  onClick={() => this._selectUserData()}>로그인</Button>
                         <div>
                         </div>
-                        <Button variant="outline-secondary"  size="sm"  onClick={() => this._closeModal()}>취소</Button>
+                        <Button variant="info"  size="sm"  onClick={() => this._closeModal()}>취소</Button>
                       </div>
                     </div>
                     </form>
@@ -180,7 +181,7 @@ class header extends Component {
                 </Modal>
             </div>
             </Navbar>
-
+     
         </div>
     );
   }

@@ -9,4 +9,4 @@ export { default as Info } from './patientinfo';
 export { default as Search } from './search';
 export { default as SearchPatient } from './searchpatient';
 export { default as SearchBoard } from './searchboard';
-export { default as HospitalBoard } from './hospitalboard';
+export { default as ReviewBoard } from './reviewboard';
