@@ -1,110 +1,99 @@
-import React, { Component } from 'react';
-import './main.css';
-import axios from 'axios';
-import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import medlogo from '../image/medinfo.PNG';
-
-class write extends Component {
-  constructor(props) {
-    super(props)
-    this.state ={
-        patient_id : "",
-        patientname : "",
-        medName : "",
-        medTime: "",
-    }
-  }
-
-  _submitwrite = async function() {
-    const patient_id = document.getElementsByName('patient_id')[0].value.trim();
-    const patientname = document.getElementsByName('patientname')[0].value.trim();
-    const medName = document.getElementsByName('medName')[0].value.trim();
-    const medTime = document.getElementsByName('medTime')[0].value.trim();
-    if(patient_id === "" ){
-        return alert('환자 번호를 입력하시오.');
-    }else if(patientname === ""){
-        return alert('환자 이름을 입력하시오.');
-    }else if(medName === ""){
-        return alert('복용 약 이름을 입력하시오.');
-    }else if(medTime === ""){
-      return alert('약 복용 주기를 입력하시오.');
-  }
-  const data = { patient_id : patient_id, patientname : patientname, medName : medName, medTime : medTime};
-  const res = await axios ('/add/timesetting',{ // 입력한 환자 번호, 이름, 약이름, 주기 전송하여 DB 입력
-      method: 'POST',
-      data : data,
-      headers : new Headers()
-  })
-  if (res.data) {
-      alert('등록 완료');
-      return window.location.replace('/');
-  }
-}
-
-
-  render() {
-
-    return (
-      <div>
-        <img src = {medlogo}
-        width='200'
-        className="boardinfo"/>
-        <div className="Write">
-          <InputGroup>
-          <FormControl
-            type='text'
-            name='patient_id'
-            id='patient_id'
-            width = "100px"
-            placeholder="환자 번호"
-            
-            />
-            </InputGroup>
-
-            <InputGroup>
-            <FormControl
-            type='text'
-            name='patientname'
-            id='patientname'
-            width = "100px"
-            placeholder="환자 이름"
-            
-            />
-            </InputGroup>
-
-            <InputGroup>
-            <FormControl
-            type='text'
-            name='medName'
-            id='medName'
-            width = "100px"
-            placeholder="복용 약 이름"
-           
-            />
-            </InputGroup>    
+import React, { Component } from 'react'; 
+ import './main.css'; 
+ import axios from 'axios'; 
+ import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps, Container } from 'react-bootstrap'; 
+ import 'bootstrap/dist/css/bootstrap.min.css'; 
+ 
+ 
+ class write extends Component { 
+     constructor(props) { 
+         super(props) 
+         this.state ={ 
+           title_board : "", 
+           writer_board : "", 
+           contents : "" 
+       } 
+     } 
+ 
+ 
+      
+   _submitBoard = async function() { 
+     const title_board = document.getElementsByName('title_board')[0].value.trim(); 
+     const writer_board = document.getElementsByName('writer_board')[0].value.trim(); 
+     const contents = document.getElementsByName('contents')[0].value.trim(); 
+     // 각 입력 칸이 비어있을때 입력버튼 눌렀으면 
+     if(title_board === "" ){  
+         return alert('제목을 입력하시오.'); 
+     }else if(writer_board === ""){ 
+         return alert('작성자를 입력하시오.'); 
+     }else if(contents === ""){ 
+         return alert('내용을 입력하시오.'); 
+     } 
+     // 각 데이터 입력값 할당  
+     const data = { title : title_board, writer : writer_board, contents : contents}; 
+     const res = await axios ('/add/board',{ //데이터베이스 삽입 요청 
+       method: 'POST',  
+       data : data, 
+       headers : new Headers() 
+   }) 
+   if(res.data){ //삽입 확인  
+     alert('게시판 등록이 완료되었습니다'); 
+     return window.location.replace('/board'); //메인화면으로 복귀 
+   } 
+    
+ } 
+ 
+ 
+   render() { 
+ 
+ 
+     return ( 
+         <div> 
+          <div className="Write"> 
+         <InputGroup> 
+         <FormControl 
+          type='text' 
+          name='title_board' 
+          id='title_board' 
+          width = "100px" 
+         placeholder="제목" 
+         aria-label="Username" 
+         aria-describedby="basic-addon1" 
+        /> 
+         </InputGroup>   
           
-            <InputGroup>
-            <FormControl
-            type='text'
-            name='medTime'
-            id='medTime'
-            width = "100px"
-            placeholder="복용 약 주기"
-           
-            />
-            </InputGroup>   
+         <InputGroup> 
+         <FormControl 
+          type='text' 
+          name='writer_board' 
+          id='writer_board' 
+          width = "100px" 
+         placeholder="작성인" 
+         aria-label="Username" 
+         aria-describedby="basic-addon1" 
+         /> 
+         </InputGroup>   
+ 
+ 
+         <InputGroup> 
+         <FormControl as="textarea" id='content_txt2' name='contents' placeholder="내용을 입력하세요." /> 
+         </InputGroup> 
+          
+          
+ 
 
-          <div id='post_submit'>
-            <Button variant="light" onClick={() => this._submitwrite()}>등록</Button>
-          </div>
+         <div id='post_submit'> 
+         <Button variant="light" onClick={() => this._submitBoard()}>등록</Button> 
+           </div> 
+ 
 
-        </div>
-        </div>
-    );
-  }
-}
+ 
+ 
+       </div> 
+         </div> 
+     ); 
+   } 
+ } 
+ 
 
-export default write;
-
-
+ export default write; 

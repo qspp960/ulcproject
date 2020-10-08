@@ -1,94 +1,143 @@
-import React, { Component } from 'react';
-import './main.css';
-import axios from 'axios';
-import listtitle from '../image/listtitle.PNG';
-import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps, Container } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import boardinfo from '../image/boardtitle.PNG';
-class board extends Component {
-  constructor(props) {
-    super(props)
-    this.state ={
-      patientid_board : "",
-      patientname_board : "",
-      contents_txt : ""
-  }
-  }
-
-  _submitBoard = async function() {
-    const title_board = document.getElementsByName('title_board')[0].value.trim();
-    const name_board = document.getElementsByName('name_board')[0].value.trim();
-    const contents_txt = document.getElementsByName('contents_txt')[0].value.trim();
-    // 각 입력 칸이 비어있을때 입력버튼 눌렀으면
-    if(title_board === "" ){ 
-        return alert('제목을 입력하시오.');
-    }else if(name_board === ""){
-        return alert('작성자를 입력하시오.');
-    }else if(contents_txt === ""){
-        return alert('내용을 입력하시오.');
-    }
-    // 각 데이터 입력값 할당 
-    const data = { title_board : title_board, name_board : name_board, contents_txt : contents_txt};
-    const res = await axios ('/add/board',{ //데이터베이스 삽입 요청
-      method: 'POST', 
-      data : data,
-      headers : new Headers()
-  })
-  if(res.data){ //삽입 확인 
-    alert('게시판 등록이 완료되었습니다');
-    return window.location.replace('/'); //메인화면으로 복귀
-  }
+import React, { Component } from 'react'; 
+import './main.css'; 
+import { Link } from 'react-router-dom'; 
+import { SearchBoard } from './index.js'; 
+import axios from 'axios'; 
+import queryString from 'query-string'; 
+import { Navbar, Nav, Form, FormControl, Button, InputGroup, InputGroupProps, Container } from 'react-bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+class board extends Component { 
+   constructor(props) { 
+        super(props) 
+        this.state = { 
+          data : [], 
+          page : 1, 
+         limit : 7, 
+        all_page : [], 
+           search : "", 
+        } 
+       } 
+      
+       componentDidMount() { 
+         this._getListData(); 
+         this._setPage(); 
+       } 
+      
+       _getListData = async function() { 
+         const { limit } = this.state; 
+         const page = this._setPage(); 
+         let search = queryString.parse(this.props.location.search); 
+          
+         if(search) { 
+           search = search.search; 
+            
+         } 
+          
+         //테이블 데이터 수 
+         const total_cnt = await axios('/get/board_cnt',{ 
+           method : 'POST', 
+           headers: new Headers(), 
+           data : { search : search } 
+         }); 
+         //데이터 가져오기 
+         const total_list = await axios('/get/board', { 
+           method : 'POST', 
+           headers: new Headers(), 
+           data : { limit : limit, page : page, search : search } 
+         }) 
+         let page_arr = []; 
+         for(let i = 1; i <= Math.ceil(total_cnt.data.cnt / limit); i++) { 
+             page_arr.push(i);} 
+         console.log(page_arr+"~~~page_arr!!!!!!!!!!!!!"); 
+         this.setState({ data : total_list, all_page : page_arr, search : search }); 
+       } 
+       //페이지바꾸기 눌렀을시 
+       _changePage = function(el) { 
+         this.setState({ page : el }) 
+         sessionStorage.setItem('page', el); 
+      
+         return this._getListData(); 
+       } 
+       //페이지 번호 설정 
+       _setPage = function() { 
+         if(sessionStorage.page) { 
+           this.setState({ page : Number(sessionStorage.page) }) 
+           return Number(sessionStorage.page); 
+         } 
+          
+         this.setState({ page : 1 }) 
+         return 1; 
+       } 
+      
+        
+       render() { 
+         const list = this.state.data.data; 
+         const { all_page, page, search } = this.state; 
+          
+         return ( 
+ 
+ 
+           <div> 
+             
+            
+           <div className='List'> 
+              
+             <div className='listhospital_grid list_tit'> 
+               <div> 제목 </div> 
+               <div> 작성자 </div> 
+               <div> 작성시각</div> 
+             </div> 
+      
+               {list && list.length>0 ? list.map( (el, key) => { 
+                 const view_url = '/view/' + el.board_id; 
+                  
+                 return( 
+                   <div className='listhospital_grid list_data' key={key}> 
+                     <div> <Link to={view_url}> {el.title} </Link> </div> 
+                     <div> {el.writer}</div> 
+                     <div> {el.writetime.slice(0, 10)} </div> 
+                   </div> 
+                 ) 
+              }) 
+                 :  <div className='not_data acenter'> 
+                     {search !== "" ? <div> 검색된 결과가 없습니다. </div> // 검색 사용 
+                                   : <div> 데이터가 없습니다. </div> // 검색 사용 X 
+                     } 
+                     </div> 
+                   } 
+             <div className='paging_div'> 
+                 <div> </div> 
+                 <div> 
+                   <ul> 
+                     {all_page ? all_page.map( (el, key) => { 
+                       return( 
+                         el === page ? <li key={key} className='page_num'> <b> {el} </b> </li> 
+                                     : <li key={key} className='page_num' onClick={() => this._changePage(el)}> {el} </li> 
+                       ) 
+                     }) 
+                      
+                     : null} 
+                   </ul> 
+ 
+ 
+                    
+                   <SearchBoard 
+                     search = {search} 
+                   /> 
+ 
+ 
+                 <div id='post_submit'> 
+                     <Button variant="light"  href="/write">글쓰기</Button> 
+                   </div> 
+                 </div> 
+                 <div> </div> 
+               </div> 
+           </div> 
+           </div> 
+         ); 
+       } 
   
-}
+  } 
 
-  render() {
-
-    return (
-      <div>
-        <img src = {boardinfo}
-        width='160'
-        className="boardinfo"/>
-      <div className="Write">
-        <InputGroup>
-        <FormControl
-         type='text'
-         name='title_board'
-         id='_title_board'
-         width = "100px"
-        placeholder="제목"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-        />
-        </InputGroup>  
-        <InputGroup>
-
-        <FormControl
-         type='text'
-         name='name_board'
-         id='_name_board'
-         width = "100px"
-        placeholder="작성자"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-        />
-        </InputGroup>  
-
-
-        <InputGroup>
-        <FormControl as="textarea" id='_contents_txt' name='contents_txt' placeholder="내용을 입력하세요." />
-        </InputGroup>
-        
-        
-
-        <div id='post_submit'>
-        <Button variant="light" onClick={() => this._submitBoard()}>등록</Button>
-          </div>
-
-
-      </div>
-      </div>
-    );
-  }
-}
-
-export default board;
+ 
+export default board; 

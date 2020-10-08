@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import { Home, Write, Signup, Board, List, Info, ReviewBoard, View } from './index.js';
+import { Home, Write, Signup, Board, List, Info, ReviewBoard, View, Purchase } from './index.js';
 import './main.css';
 
 class main extends Component {
@@ -18,14 +18,11 @@ class main extends Component {
             <div id='Mains-left'>
             </div>
             <div>
-                <Route path='/' component={Home} exact />
-                <Route path='/write' component={Write} />
+                <Route path='/' component={Home} exact />          
                 <Route path='/signup' component={Signup} />
                 <Route path='/board' component={Board} />
-                <Route path='/list' component={List} />
-                <Route path='/patientinfo' component={Info} />
-                <Route path='/reviewboard' component={ReviewBoard} />
-                <Route path='/view/:data' component={View}/>
+                <Route path='/write' component={Write}/>
+                <Route path='/view/:data' component={View} />
 
             </div>
             <div id='Mains-right'>

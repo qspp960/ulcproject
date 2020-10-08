@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import '../App.css';
 import logo from '../image/logo.PNG';
-import logo1 from '../image/logo1.jpg';
+import logo1 from '../image/logo1.PNG';
 import Modal from 'react-awesome-modal';
 import axios from 'axios';
-import imgtitle from '../image/title.png';
 import '../page/main.css';
 import { Navbar, Nav, Form, FormControl, Button, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ReviewBoard } from '../page';
-import ReviewBoards  from '../page/reviewboard';
+
 class header extends Component {
   constructor(props){
       super(props)
@@ -27,6 +25,7 @@ class header extends Component {
     if(sessionStorage.login) {
       this.setState({ login : true })
     }
+    
   }
   _selectUserData = async (e) => { const id = this.state.id.trim();
     const password = this.state.password.trim();
@@ -91,43 +90,49 @@ class header extends Component {
         loginid : "" })
     }
   }
-
+  
   render() {
+    const url = '/'+this.state.loginid;
+    const { admin, user_ip } = this.props;
     console.log('아이디: ' + this.state.id + ' 비밀번호: '+this.state.password);
 
     return (
         
         <div className="Navigation">
       
-            <Navbar bg="info" variant="light">
-            <Navbar.Brand href='/'><img width="45" height="40" src={logo}></img></Navbar.Brand>
+            <Navbar bg="secondary" variant="light">
+            <Navbar.Brand href='/'><img width="80" height="40" src={logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
             <Dropdown>
-            <Dropdown.Toggle variant="info" id="dropdown-button-drop-down">
-            PRODUCT
+            <Dropdown.Toggle variant="secondary" id="dropdown-button-drop-down">
+            CLASS
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>제품 구매</Dropdown.Item>
+            {this.state.login ?
+              <Dropdown.Item >온라인 수업</Dropdown.Item>:
+              <Dropdown.Item> 온라인 수업</Dropdown.Item>}
               {this.state.login ?
-              <Dropdown.Item href='/reviewboard'>제품 후기</Dropdown.Item>:
-              <Dropdown.Item> 제품 후기</Dropdown.Item>}
+              <Dropdown.Item> 성적 확인 </Dropdown.Item>:
+              <Dropdown.Item> 성적 확인</Dropdown.Item>}
             </Dropdown.Menu>
             </Dropdown>
 
             <Dropdown>
-            <Dropdown.Toggle variant="info" id="dropdown-basic">
-            HEALTH
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            COMMUNITY
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>영양제 추천</Dropdown.Item>
-              <Dropdown.Item>건강 계산기</Dropdown.Item>
+              <Dropdown.Item>팀원 찾기</Dropdown.Item>
+              {this.state.login ? 
+                 <Dropdown.Item href="/board">자유게시판</Dropdown.Item> 
+                : <Dropdown.Item>자유게시판</Dropdown.Item>} 
             </Dropdown.Menu>
             </Dropdown>
 
             <Dropdown>
-            <Dropdown.Toggle variant="info" id="dropdown-basic">
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
             MY PAGE
             </Dropdown.Toggle>
 
@@ -143,10 +148,10 @@ class header extends Component {
                     
                 </Nav>
                 <div className='acenter_login'> 
-                  {this.state.login ? <Button variant="info" href='/'><h6 onClick={() => this._logout()}>LOGOUT</h6></Button>
+                  {this.state.login ? <Button variant="secondary" href='/'><h6 onClick={() => this._logout()}>LOGOUT</h6></Button>
                   : <div className='menu'>
-                      <li><h6 className='btn_cursor'onClick={() => this._openModal()}><Button variant="info" >LOGIN</Button></h6></li>
-                      <li><h6> <Button variant="info" href='/signup'>SIGNUP</Button></h6></li>
+                      <li><h6 className='btn_cursor'onClick={() => this._openModal()}><Button variant="secondary" >LOGIN</Button></h6></li>
+                      <li><h6> <Button variant="secondary" href='/signup'>SIGNUP</Button></h6></li>
                     </div>
             }
             <Modal visible={this.state.visible} 
@@ -156,7 +161,7 @@ class header extends Component {
                   <div>
 
                     <h5 className='acenter_login_tit'> LOGIN </h5>
-                    <img width="45" height="40" src={logo1}></img>
+                    <img width="80" height="40" src={logo1}></img>
                     <form>
                     <div className='login_div'>
                       <div className='login_input_div'>
@@ -170,10 +175,10 @@ class header extends Component {
                       </div>
 
                       <div className='submit_div'>
-                        <Button variant="info"  size="sm"  onClick={() => this._selectUserData()}>로그인</Button>
+                        <Button variant="secondary"  size="sm"  onClick={() => this._selectUserData()}>로그인</Button>
                         <div>
                         </div>
-                        <Button variant="info"  size="sm"  onClick={() => this._closeModal()}>취소</Button>
+                        <Button variant="secondary"  size="sm"  onClick={() => this._closeModal()}>취소</Button>
                       </div>
                     </div>
                     </form>

@@ -2,10 +2,10 @@
 {
     "development" : {
         "username": "root", 
-        "password": "ranch0104", 
-        "database": "iotdevelopers",
+        "password": "qs!!806701", 
+        "database": "ulc",
         "host": "localhost",
-        "port": "3306",
+        "port": "3307",
         "dialect": "mysql"
     },
     "salt" : "qwasgfeqweqsadfsdfweqwhefdssdfaafsdfdqwefvbgd"

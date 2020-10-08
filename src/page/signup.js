@@ -140,7 +140,7 @@ class Signup extends Component {
           </div>
         </div>
         <div>
-        <Button className="signupbtn" variant="info" onClick={() => this._signup()}>가입하기</Button>
+        <Button className="signupbtn" variant="secondary" onClick={() => this._signup()}>가입하기</Button>
       </div>
       </div>
 

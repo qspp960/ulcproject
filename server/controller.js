@@ -33,96 +33,9 @@ module.exports = {
             console.log('2. hash 결과 : ', hash);
           },
     },
-    get : { 
-      board_data : (req, res) => {
-        const body = req.body;
-
-        model.get.board_data(body, data => {
-          const result = { data : data }
-          res.send(result);
-          console.log("board_data"+ data[0].writer);
-        })
-      },
-      //사용자 튜플 수 count model에 요청
-      users_cnt : (req, res) => {
-        const body = req.body;
-        model.get.users_cnt(body, cnt => {
-          const result = { cnt : cnt }
-          res.send(result)
-        })
-      },
-      
-      reviewboard_cnt : (req, res) => {
-        const body = req.body;
-        model.get.reviewboard_cnt(body, cnt => {
-          const result = { cnt : cnt }
-          res.send(result)
-        })
-      },     
-       //게시판 튜플 수 count model에 요청
-      board_cnt : (req, res) => {
-        const body = req.body;
-        model.get.board_cnt(body, cnt => {
-          const result = { cnt : cnt }
-          res.send(result)
-        })
-      },
-        //환자 약 복용 데이터 튜플 수 count model에 요청
-      medicrecords_cnt : (req, res) => {
-        const body = req.body;
-        model.get.medicrecords_cnt(body, cnt => {
-          const result = { cnt : cnt }
-          res.send(result)
-        })
-      }, 
-      //사용자 데이터 가져오기 model에 요청
-      users : (req, res) => {
-        const body = req.body;
-        model.get.users(body, result => {
-          if(result) {
-            res.send(result);
-          }
-        })
-      },
-      //약 복용 데이터 가져오기 model에 요청
-      medicrecords : (req, res) => {
-        const body = req.body;
-        model.get.medicrecords(body, result => {
-          if(result) {
-            res.send(result);
-          }
-        })
-      },
-      //게시판 가져오기 model에 요청
-      board : (req, res) => {
-        const body = req.body;
-        model.get.board(body, result => {
-          if(result) {
-            res.send(result);
-          }
-        })
-      },
-      reviewboard : (req, res) => {
-        const body = req.body;
-        model.get.reviewboard(body, result => {
-          if(result) {
-            res.send(result);
-          }
-        })
-      }
-
-    },
 
     add : {
-      //게시판 입력 값 추가 model에 요청
-      board : (req, res) =>{
-        const body = req.body;
-        model.add.board(body, result =>{
-          if(result){
-            res.send(true);
-          }
-        })
-      },
+      
       //회원가입 입력값 추가 model에 요청
       homepageusers : (req, res) => {
         const body = req.body;
@@ -131,33 +44,49 @@ module.exports = {
           res.send(result);
         })
       },
-      //약 복용 데이터 추가 model에 요청
-      timesetting : (req, res) => {
-        const body = req.body;
-        model.api.searchOverlap(body, result =>{
-          if(result[0]){
-            model.delete.delOverlap(body, result=>{
-              model.add.timesetting(body, result => {
-                if(result) {
-                  res.send(true);
-                }
-            })
-            })
-          }
-          else{
-          model.add.timesetting(body, result => {
-              if(result) {
-                res.send(true);
-              }
-          })
-
-        }
-
-        })
-
+      board : (req, res) =>{ 
+              const body = req.body; 
+               model.add.board(body, result =>{ 
+                if(result){ 
+                    res.send(true); 
+                  } 
+               }) 
+             }, 
         
-      },
+      
+
+
     },
+    get : { 
+      board_data : (req, res) => { 
+                const body = req.body; 
+    
+         
+           model.get.board_data(body, data => { 
+                const result = { data : data } 
+                res.send(result) 
+              }) 
+             }, 
+        
+      board : (req, res) => { 
+              const body = req.body; 
+              model.get.board(body, result => { 
+                if(result) { 
+                     res.send(result); 
+                  } 
+                 }) 
+             }, 
+              
+      board_cnt : (req, res) => { 
+          const body = req.body; 
+          model.get.board_cnt(body, cnt => { 
+            const result = { cnt : cnt } 
+         res.send(result) 
+         }) 
+        },      
+  
+        
+    }
 
 }
 

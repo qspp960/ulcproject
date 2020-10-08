@@ -36,13 +36,8 @@ let sequelize = new Sequelize(
         console.log('UNABLE TO CONNECT DB!! -> ', err);
     });
     ///사용할 각 데이터베이스 테이블들 
-    db.Admin = require('./Admin')(sequelize,Sequelize);
-    db.Timesetting = require('./TimeSetting')(sequelize,Sequelize);
+
+    db.Boards = require('./Boards')(sequelize, Sequelize);
     db.Homepageusers = require('./Homepageusers')(sequelize, Sequelize);
-    db.Alltimelist = require('./Alltimelist')(sequelize, Sequelize);
-    db.Boards = require('./Board')(sequelize, Sequelize);
-    db.Users = require('./Users')(sequelize, Sequelize);
-    db.ReviewBoards = require('./Reviewboards')(sequelize, Sequelize);
-    db.MedicRecords = require('./MedicRecords')(sequelize, Sequelize);
     db.secret = '(9*)5$&dfds!3%^0%^@@2$1!#5@2sdf!4'; //hash값
 module.exports = db;
