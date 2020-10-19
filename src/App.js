@@ -3,7 +3,7 @@ import './App.css';
 
 import { Head } from './inc'
 import { Main } from './page/index.js'
-
+import { Login } from './inc'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -12,6 +12,7 @@ class App extends Component {
       admin : false,
       user_ip : "",
       signup : false,
+      login_modal : false,
     }
   }
 
@@ -26,6 +27,9 @@ class App extends Component {
     }
   }
 
+  _toggleModal = (boolean) => {
+    this.setState({ login_modal : boolean })
+  }
   _login = (data) => {
     sessionStorage.setItem('login', JSON.stringify(data.suc))
     sessionStorage.setItem('IP', JSON.stringify(data.ip))
@@ -45,8 +49,8 @@ class App extends Component {
   }
 
   render() {
-    const { login, admin, user_ip } = this.state;
-    const { _login, _logout } = this;
+    const { login, admin, user_ip, login_modal} = this.state;
+    const { _login, _logout, _toggleModal } = this;
 
     return(
     <div>
@@ -57,6 +61,8 @@ class App extends Component {
           user_ip = {user_ip}
           _login = {_login}
           _logout = {_logout}
+          login_modal = {login_modal}
+          _toggleModal = {_toggleModal}
         />
       </div>
 

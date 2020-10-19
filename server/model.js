@@ -6,6 +6,7 @@ moment.tz.setDefault("Asia/Seoul");
 const now_date = moment().format('YYYY-MM-DD HH:mm:ss');
 const {
     Homepageusers,
+    Reply,
     Boards,
     Sequelize: { Op }
 } = require('./models');
@@ -28,6 +29,31 @@ module.exports = {
         
     },
 
+    search : {
+        id : (body,callback) => {
+            Homepageusers.findAll({
+                where: {
+                    name : body.user_name,
+                    birthday : body.user_birthday,
+                    sex : body.user_sex,
+                    email : body.user_email
+                }
+            })
+            .then(result => { callback(result)})
+            .catch(err => { throw err;})
+        },
+        pw : (body, callback) => {
+            Homepageusers.findAll({
+                where : {
+                    id : body.user_id,
+                    email : body.user_email
+                }
+            })
+            .then(result => { callback(result)})
+            .catch(err => { throw err; })
+        }
+    },
+
     add : {
         board : (body, callback) =>{ 
                 Boards.create({ 
@@ -43,6 +69,17 @@ module.exports = {
                            throw err; 
                      }) 
                   }, 
+
+                  reply : (body, now_date, callback) => {
+                    Reply.create({
+                        contents : body.contents,
+                        date : now_date,
+                        board_id : body.board_id,
+                        user_id : body.user_id
+                    })
+                    .then( () => callback(true) )
+                    .catch( () => callback(false) )
+                },
             
         
         // 사용자 추가
@@ -67,23 +104,24 @@ module.exports = {
                     .then( () => callback(true) );
                 }
             })
-        },
+        }
         
     },
 
     get : {
         board_data : (body, callback) => { 
+            
                       Boards.findAll({ 
+                          
                             where : { board_id : body.id } 
                       }) 
                     .then(result => { 
-                            callback(result); 
+                            callback(result);   
                         }) 
                     .catch(err => { 
                            throw err; 
                        }) 
-                }, 
-            
+        },
         board_cnt : (body, callback) => { 
                          let search = "%%"; 
              
@@ -122,13 +160,23 @@ module.exports = {
                                  offset : (body.page - 1) * body.limit, 
                                  order: sequelize.literal('board_id DESC') 
                              }) 
-                         .then(data => { 
-                             callback(data) 
+                         .then(result => { 
+                             callback(result) 
                          }) 
                          .catch(err => { 
                              throw err; 
                          }) 
                      }, 
             
+    },
+    update : {
+        password : (body, hash_pw, callback) => {
+            Homepageusers.update({ password : hash_pw }, {
+                where : { id : body.user_id }
+            })
+            .then( () => { callback(true) })
+            .catch(err => { throw err; })
+        }
     }
+
 }

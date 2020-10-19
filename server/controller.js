@@ -9,6 +9,36 @@ const salt  = require(path.join(__dirname, 'config', 'db.json'))
  moment.tz.setDefault("Asia/Seoul");
  const user_ip = require("ip"); //사용자 아이피 가져오기
  const now_date = moment().format('YYYY-MM-DD HH:mm:ss');
+ const nodeMailer = require('nodemailer');
+ const mailPoster = nodeMailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'qspp1250@gmail.com',
+    pass: 'qs!!123123'
+  }
+});
+const mailOpt = (user_data,title, contents) => {
+  const mailOptions = {
+    from: 'qspp1250@gmail.com',
+    to: user_data.email ,
+    subject: title,
+    text: contents
+  };
+
+  return mailOptions;
+};
+
+// 메일 전송
+const sendMail = (mailOption) => {
+  mailPoster.sendMail(mailOption, function(error, info){
+    if (error) {
+      console.log('에러 ' + error);
+    }
+    else {
+      console.log('전송 완료 ' + info.response);
+    }
+  });
+}
 module.exports = {
     needs: () => upload,
     api : {
@@ -34,6 +64,43 @@ module.exports = {
           },
     },
 
+    search : {
+      id : (req,res) => {
+        const body = req.body;
+        model.search.id(body,result => {
+          res.send(result)
+        })
+      },
+      pw : (req,res) => {
+        const body = req.body;
+        model.search.pw(body, result => {
+          var res_data = {};
+
+          if(result[0]) {
+            // 조회되는 데이터가 있는 경우 (메일 전송)
+            const title = "비밀번호 조회 인증에 대한 6자리 숫자입니다.";
+            const contents = () => {
+              let number = "";
+              let random = 0;
+
+              for(let i = 0; i < 6; i++){
+                random = Math.trunc(Math.random() * (9 - 0) + 0);
+                number += random;
+              }
+              res_data['secret'] = number;
+              return "인증 칸에 아래의 숫자를 입력해주세요. \n" + number;
+            }
+            const mailOption = mailOpt(result[0].dataValues,title,contents());
+            sendMail(mailOption);
+            res_data['result'] = result;
+            res.send(res_data);
+          }else{
+            res.send(false)
+          }
+        })
+      }
+    },
+
     add : {
       
       //회원가입 입력값 추가 model에 요청
@@ -52,10 +119,14 @@ module.exports = {
                   } 
                }) 
              }, 
-        
+
+      reply : (req, res) => {
+              const body = req.body;
       
-
-
+              model.add.reply(body, now_date, result => {
+                res.send(result)
+              })
+            }
     },
     get : { 
       board_data : (req, res) => { 
@@ -67,7 +138,7 @@ module.exports = {
                 res.send(result) 
               }) 
              }, 
-        
+      
       board : (req, res) => { 
               const body = req.body; 
               model.get.board(body, result => { 
@@ -86,6 +157,16 @@ module.exports = {
         },      
   
         
+    },
+    update : {
+      password : (req, res) => {
+        const body = req.body;
+        const hash_pw = hashing.enc(body.user_id, body.change_password, salt);
+
+        model.update.password(body, hash_pw, result => {
+          res.send(true)
+        })
+      }
     }
 
 }

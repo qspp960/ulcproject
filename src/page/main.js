@@ -16,6 +16,7 @@ class main extends Component {
 
         <div className='Mains'>
             <div id='Mains-left'>
+              <h3> Left Side </h3>
             </div>
             <div>
                 <Route path='/' component={Home} exact />          
@@ -26,7 +27,7 @@ class main extends Component {
 
             </div>
             <div id='Mains-right'>
-                
+                <h3> Right Side </h3>
             </div>
         </div>
       </div>

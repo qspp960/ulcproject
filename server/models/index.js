@@ -37,7 +37,17 @@ let sequelize = new Sequelize(
     });
     ///사용할 각 데이터베이스 테이블들 
 
+    db.Reply = require('./reply')(sequelize, Sequelize);
     db.Boards = require('./Boards')(sequelize, Sequelize);
     db.Homepageusers = require('./Homepageusers')(sequelize, Sequelize);
     db.secret = '(9*)5$&dfds!3%^0%^@@2$1!#5@2sdf!4'; //hash값
+    db.Admin = require('./admin')(sequelize,Sequelize);
+    db.Homepageusers.hasMany(db.Reply, {
+      foreignKey: 'user_id',
+      sourceKey : 'user_id'
+    });
+    db.Reply.belongsTo(db.Homepageusers, {
+      foreignKey: 'user_id',
+      targetKey : 'user_id'
+    });
 module.exports = db;
